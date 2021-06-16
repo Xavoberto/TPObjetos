@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class Factura {
+public class Factura implements DocumentoRecibido{
     private Proveedor proveedor;
     private OrdenDeCompra ordenDeCompra;
     private LocalDate fecha;
-    private List<ProductoFactura> producto;
+    private List<ProductoFactura> productos;
 
 
 
@@ -26,6 +26,12 @@ public class Factura {
     }
 
     public double getMonto(){
-        return 0;
+        double monto = 0;
+
+        for (ProductoFactura producto : productos) {
+            monto =+ producto.getPrecio();
+        }
+
+        return monto;
     }
 }

@@ -8,4 +8,20 @@ public class ProductoServicio {
     public double getPrecio() {
         return precio;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public TipoDeUnidad getTipoDeUnidad() {
+        return tipoDeUnidad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Iva getIva() {
+        return iva;
+    }
 }

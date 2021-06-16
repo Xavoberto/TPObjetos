@@ -11,6 +11,6 @@ public class Rubro {
     }
 
     public ProductoServicioDTO getProductoServicio(ProductoServicio productoServicio){
-        return;
+        return new ProductoServicioDTO();
     }
 }

@@ -4,8 +4,6 @@ public class ProveedorProducto {
     private double precio;
 
     public ProductoServicioDTO getProductoServicio(){
-        ProductoServicioDTO producto2 = new ProductoServicioDTO();
-         return producto2;
-
+         return new ProductoServicioDTO(producto.getNombre(),producto.getTipoDeUnidad(),producto.getPrecio(),producto.getDescripcion(),producto.getIva());
     }
 }

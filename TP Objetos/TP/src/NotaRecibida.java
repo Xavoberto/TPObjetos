@@ -1,4 +1,4 @@
-public class NotaRecibida {
+public class NotaRecibida implements DocumentoRecibido{
     private double monto;
     private Proveedor proveedor;
     private TipoNota notaDe;
