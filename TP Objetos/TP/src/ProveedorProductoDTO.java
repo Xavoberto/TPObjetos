@@ -5,7 +5,7 @@ public class ProveedorProductoDTO {
     private double precio;
 
 
-    ProveedorProductoDTO(Proveedor proveedor, ProductoServicio productoServicio, double precio){
+    public ProveedorProductoDTO(Proveedor proveedor, ProductoServicio productoServicio, double precio){
         this.proveedor = proveedor;
         this.productoServicio = productoServicio;
         this.precio = precio;

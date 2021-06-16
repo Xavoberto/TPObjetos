@@ -4,7 +4,8 @@ public class ProveedorProducto {
     private double precio;
 
     public ProductoServicioDTO getProductoServicio(){
-         return;
+        ProductoServicioDTO producto2 = new ProductoServicioDTO();
+         return producto2;
 
     }
 }
