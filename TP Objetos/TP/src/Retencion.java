@@ -11,7 +11,7 @@ public class Retencion {
         return total;
     }
 
-    public Retencion CalcularRetencion(DocumentoRecibido documentosAsociados){//
+    public Retencion CalcularRetencion(DocumentoRecibido documentosAsociados){
         return;
     }
 

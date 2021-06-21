@@ -10,7 +10,4 @@ public class Rubro {
 
     }
 
-    public ProductoServicioDTO getProductoServicio(ProductoServicio productoServicio){
-        return new ProductoServicioDTO();
-    }
 }
