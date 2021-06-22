@@ -14,8 +14,6 @@ public class RetencionController {
 
     public void AltaRetencion(RetencionDTO retencion){
 
-
-
     }
 
     public ConsultaLibroIvaDTO ConsultaLibroIva(int proveedor, DocumentoRecibido documentoRecibido){

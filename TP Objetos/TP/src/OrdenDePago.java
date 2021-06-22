@@ -6,4 +6,10 @@ public class OrdenDePago {
     private Retencion totalRetencion;
     private List<DocumentoRecibido> documentosAsociados;
 
+    OrdenDePago(OrdenDePagoDTO ordenDePagoDTO){
+        this.documentosAsociados = ordenDePagoDTO.getDocumentosAsociados();
+        this.formaDePago = ordenDePagoDTO.getFormaDePago();
+        this.total = ordenDePagoDTO.getTotal();
+        this.totalRetencion = ordenDePagoDTO.getTotalRetencion();
+    }
 }

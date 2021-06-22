@@ -12,10 +12,12 @@ public class Retencion {
     }
 
     public Retencion CalcularRetencion(DocumentoRecibido documentosAsociados){
-        return;
+
     }
 
-
-
-
+    Retencion(RetencionDTO retencionDTO){
+        proveedor = retencionDTO.getProveedor();
+        fecha = LocalDate.now();
+        total = retencionDTO.getTotal();
+    }
 }
