@@ -34,4 +34,12 @@ public class Factura implements DocumentoRecibido{
 
         return monto;
     }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
 }

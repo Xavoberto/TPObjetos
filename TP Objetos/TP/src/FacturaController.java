@@ -9,16 +9,33 @@ public class FacturaController {
         return;
     }
 
-    public List<Factura> FacturasRecibidas(LocalDate fecha,Proveedor proveedor){
-
-        return facturas;
+    public double FacturasRecibidas(LocalDate fecha,Proveedor proveedor){
+        double total = 0;
+        for (int i = 0; i < facturas.size(); i++){
+            if (facturas.get(i).getFecha() == fecha && facturas.get(i).getProveedor() == proveedor){
+                total += facturas.get(i).getMonto();
+            }
+        }
+        return total;
     }
 
-    public List<Factura> FacturasRecibidas(LocalDate fecha){
-        return facturas;
+    public double FacturasRecibidas(LocalDate fecha){
+        double total = 0;
+        for (int i = 0; i < facturas.size(); i++){
+            if (facturas.get(i).getFecha() == fecha){
+                total += facturas.get(i).getMonto();
+            }
+        }
+        return total;
     }
 
-    public List<Factura> FacturasRecibidas(Proveedor proveedor){
-        return facturas;
+    public double FacturasRecibidas(Proveedor proveedor){
+        double total = 0;
+        for (int i = 0; i < facturas.size(); i++){
+            if (facturas.get(i).getProveedor() == proveedor){
+                total += facturas.get(i).getMonto();
+            }
+        }
+        return total;
     }
 }
