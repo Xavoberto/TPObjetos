@@ -7,4 +7,5 @@ public class ProductoFactura {
     public double getPrecio() {
         return precio;
     }
+    public Iva getIva() {return iva;}
 }

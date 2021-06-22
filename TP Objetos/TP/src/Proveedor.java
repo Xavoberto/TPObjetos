@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,8 +14,24 @@ public class Proveedor {
     private List<Rubro> rubros;
     private List<Certificado> certificados;
     private CuentaCorriente cuentaCorriente;
-    private List<ProveedorProducto> proveedorProducto;
-    private List<NotaRecibida> notaRecibida;
+    private List<ProveedorProducto> proveedorProductos;
+    private List<NotaRecibida> notaRecibidas;
+
+    public Proveedor(ProveedorDTO proveedor) {
+        certificados = proveedor.getCertificados();
+        correoElectronico = proveedor.getCorreoElectronico();
+        cuentaCorriente = proveedor.getCuentaCorriente();
+        inicioActividades = proveedor.getInicioActividades();
+        cuit = proveedor.getCuit();
+        direccion = proveedor.getDireccion();
+        nombreFantasia = proveedor.getNombre();
+        telefono = proveedor.getTelefono();
+        numeroIngresosBrutos = proveedor.getIngresosBrutos();
+        rubros = proveedor.getRubros();
+        notaRecibidas = proveedor.getNotasRecibidas();
+        proveedorProductos = proveedor.getProveedorProductos();
+        responsableIva = proveedor.getResponsableIva();
+    }
 
 
     public void AltaCertificado(CertificadoDTO Certificado){
@@ -45,5 +62,52 @@ public class Proveedor {
         return cuentaCorriente;
     }
 
+    public List<Certificado> getCertificados() {
+        return certificados;
+    }
+
+    public void CertificadoVencido(Certificado certificado) {
+        certificados.remove(certificado);
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public LocalDateTime getInicioActividades() {
+        return inicioActividades;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public String getNombre() {
+        return nombreFantasia;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public double getIngresosBrutos() {
+        return numeroIngresosBrutos;
+    }
+
+    public List<Rubro> getRubros() {
+        return rubros;
+    }
+
+    public List<NotaRecibida> getNotasRecibidas() {
+        return notaRecibidas;
+    }
+
+    public List<ProveedorProducto> getProveedorProductos() {
+        return proveedorProductos;
+    }
+
+    public ResponsableIva getResponsableIva() {
+        return responsableIva;
+    }
 }
 

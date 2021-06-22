@@ -17,13 +17,17 @@ public class CuentaCorriente {
     }
 
     public void RealizarPago(FormaDePago formaDePago, List<DocumentoRecibido> documentosAPagar){
-        RetencionDTO retencionDTO = new RetencionDTO(proveedor,0);
-        Retencion retencion = new Retencion(retencionDTO);
+        double montoAPagar = 0;
+        for (DocumentoRecibido documentoRecibido : documentosAPagar) {
+            montoAPagar += documentoRecibido.getMonto();
+        }
 
-        OrdenDePagoDTO ordenDTO = new OrdenDePagoDTO(0,formaDePago,retencion,documentosAPagar);
+        Retencion retencion = new Retencion(proveedor,montoAPagar, documentosAPagar);
+
+        OrdenDePagoDTO ordenDTO = new OrdenDePagoDTO(montoAPagar,formaDePago,retencion,documentosAPagar);
         OrdenDePago orden = new OrdenDePago(ordenDTO);
-        pagosRealizados.add(orden);
 
+        pagosRealizados.add(orden);
     }
 
     public Proveedor getProveedor() {

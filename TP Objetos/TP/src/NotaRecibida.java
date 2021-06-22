@@ -7,4 +7,8 @@ public class NotaRecibida implements DocumentoRecibido{
     public double getMonto() {
         return monto;
     }
+
+    public boolean esFactura(){
+        return false;
+    }
 }

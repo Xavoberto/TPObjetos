@@ -8,7 +8,6 @@ public class Factura implements DocumentoRecibido{
     private List<ProductoFactura> productos;
 
 
-
     public Factura BuscarFactura(LocalDate fecha, Proveedor proveedor){
         Factura factura = new Factura();
 
@@ -41,5 +40,18 @@ public class Factura implements DocumentoRecibido{
 
     public Proveedor getProveedor() {
         return proveedor;
+    }
+
+    public double getIvaTotal(){
+        double iva = 0;
+
+        for(ProductoFactura producto : productos){
+            iva += producto.getIva().getValor();
+        }
+        return iva;
+    }
+
+    public boolean esFactura(){
+        return true;
     }
 }
