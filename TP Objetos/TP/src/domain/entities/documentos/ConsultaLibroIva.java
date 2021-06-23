@@ -1,0 +1,15 @@
+package domain.entities.documentos;
+
+import domain.entities.Proveedor;
+import domain.entities.interfaces.DocumentoRecibido;
+
+import java.time.LocalDate;
+
+public class ConsultaLibroIva {
+    private Proveedor proveedor;
+    private LocalDate fecha;
+    private DocumentoRecibido tipoDocumento;
+    private Iva iva;
+    private double total;
+
+}
