@@ -81,6 +81,9 @@ public class ProveedorController {
 
     public Optional<Proveedor> buscarProveedor(int cuit){
         Optional<Proveedor> proveedorOptional = this.proveedores.stream().filter(p -> p.getCuit() == cuit).findFirst();
+
+        if (!proveedorOptional.isPresent())
+            return null;
         return proveedorOptional;
     }
 
@@ -99,4 +102,3 @@ public class ProveedorController {
         return ordenDePagoDTOList;
     }
 }
-

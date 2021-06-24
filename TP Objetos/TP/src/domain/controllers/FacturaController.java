@@ -26,16 +26,11 @@ public class FacturaController {
 
     public void AltaFactura(FacturaDTO factura){
             facturas.add(new Factura(factura));
-            return;
     }
-
 
     public Double TotalDeFacturas(LocalDate fecha, int cuitProveedor){
         ProveedorController proveedorController = ProveedorController.getInstance();
         Optional<Proveedor> optionalProveedor = proveedorController.buscarProveedor(cuitProveedor);
-
-        if (!optionalProveedor.isPresent())
-            return null;
 
         return optionalProveedor.get().getCuentaCorriente().TotalDeFacturas(fecha);
     }

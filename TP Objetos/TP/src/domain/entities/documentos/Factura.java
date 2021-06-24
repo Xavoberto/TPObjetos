@@ -21,16 +21,8 @@ public class Factura implements DocumentoRecibido {
 
     }
 
-
-
     public double getMonto(){
-        double monto = 0;
-
-        for (ProductoFactura producto : productos) {
-            monto =+ producto.getPrecio();
-        }
-
-        return monto;
+        return productos.stream().mapToDouble(p -> p.getPrecio()).sum();
     }
 
     public LocalDate getFecha() {
@@ -41,16 +33,11 @@ public class Factura implements DocumentoRecibido {
         return proveedor;
     }
 
-    public double getIvaTotal(){
-        double iva = 0;
-
-        for(ProductoFactura producto : productos){
-            iva += producto.getIva().getValor();
-        }
-        return iva;
-    }
-
     public boolean esFactura(){
         return true;
+    }
+
+    public double getIvaTotal(){
+        return productos.stream().mapToDouble(p -> p.getIva().getValor()).sum();
     }
 }

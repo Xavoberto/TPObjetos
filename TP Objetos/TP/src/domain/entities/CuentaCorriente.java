@@ -1,9 +1,11 @@
 package domain.entities;
 
+import domain.controllers.RetencionController;
 import domain.entities.documentos.Factura;
 import domain.entities.documentos.NotaRecibida;
 import domain.entities.documentos.OrdenDePago;
 import domain.entities.documentos.dtos.OrdenDePagoDTO;
+import domain.entities.entitiesDtos.RetencionDTO;
 import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.interfaces.DocumentoRecibido;
 
@@ -35,17 +37,11 @@ public class CuentaCorriente {
     }
 
     public void RealizarPago(FormaDePago formaDePago, List<DocumentoRecibido> documentosAPagar){
-        double montoAPagar = 0;
-        for (DocumentoRecibido documentoRecibido : documentosAPagar) {
-            montoAPagar += documentoRecibido.getMonto();
-        }
+        RetencionController retencionController = RetencionController.getInstance();
 
-        Retencion retencion = new Retencion(proveedor,montoAPagar, documentosAPagar);
-
-        OrdenDePagoDTO ordenDTO = new OrdenDePagoDTO(montoAPagar,formaDePago,retencion,documentosAPagar);
-        OrdenDePago orden = new OrdenDePago(ordenDTO);
-
-        pagosRealizados.add(orden);
+        double montoAPagar = documentosAPagar.stream().mapToDouble(d -> d.getMonto()).sum();
+        Retencion retencion = retencionController.AltaRetencion(proveedor, montoAPagar, documentosAPagar);
+        pagosRealizados.add(new OrdenDePago(montoAPagar,formaDePago,retencion,documentosAPagar));
     }
 
     public Proveedor getProveedor() {

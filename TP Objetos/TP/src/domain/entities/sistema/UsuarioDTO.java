@@ -5,9 +5,21 @@ public class UsuarioDTO {
     private int dni;
     private String contrasena;
 
-    UsuarioDTO(String nombre, String contrasena,int dni){
+    public UsuarioDTO(String nombre, String contrasena,int dni){
         this.contrasena = contrasena;
         this.dni = dni;
         this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public String getContraseña() {
+        return contrasena;
     }
 }

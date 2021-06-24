@@ -6,4 +6,8 @@ public class Iva {
     public double getValor(){
         return valor;
     }
+
+    public Iva(double valor){
+        this.valor = valor;
+    }
 }

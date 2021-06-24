@@ -12,4 +12,11 @@ public class ConsultaLibroIva {
     private Iva iva;
     private double total;
 
+    public int getCuitProveedor() {
+        return proveedor.getCuit();
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
 }

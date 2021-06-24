@@ -20,6 +20,13 @@ public class OrdenDePago {
         this.totalRetencion = ordenDePagoDTO.getTotalRetencion();
     }
 
+    public OrdenDePago(double total, FormaDePago formaDePago, Retencion retencion, List<DocumentoRecibido> documentoRecibido){
+        this.total = total;
+        this.formaDePago = formaDePago;
+        this.totalRetencion = retencion;
+        this.documentosAsociados = documentoRecibido;
+    }
+
     public List<DocumentoRecibido> getDocumentosRecibidos() {
         return documentosAsociados;
     }
