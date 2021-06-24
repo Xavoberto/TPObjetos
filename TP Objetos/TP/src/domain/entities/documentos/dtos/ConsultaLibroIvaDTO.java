@@ -8,7 +8,7 @@ import domain.entities.interfaces.DocumentoRecibido;
 import java.time.LocalDate;
 
 public class ConsultaLibroIvaDTO {
-    private Proveedor proveedor;
+    private ProveedorDTO proveedor;
     private LocalDate fecha;
     private DocumentoRecibido tipoDocumento;
     private Iva iva;
