@@ -20,6 +20,14 @@ public class CuentaCorriente {
     private List<Factura> documentosImpagos;
     private List<OrdenDePago> pagosRealizados;
 
+    public CuentaCorriente(Proveedor proveedor, double deuda, List<NotaRecibida> documentoRecibidos, List<Factura> facturas, List<OrdenDePago> pagosRealizados){
+        this.proveedor = proveedor;
+        this.deuda = deuda;
+        this.documentosRecibidos = documentoRecibidos;
+        this.documentosImpagos = facturas;
+        this.pagosRealizados = pagosRealizados;
+    }
+
     public double TotalDeFacturas(){
         return this.documentosImpagos.stream().mapToDouble(f -> f.getMonto()).sum();
     }
@@ -58,5 +66,13 @@ public class CuentaCorriente {
 
     public List<OrdenDePago> PagoRealizado() {
         return PagoRealizado();
+    }
+
+    public String Print() {
+        return "Nombre: " + proveedor.getNombre() + "  Deuda: " + deuda;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }

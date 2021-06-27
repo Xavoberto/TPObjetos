@@ -20,13 +20,7 @@ public class FrmInternalFacturasRecibidas extends JInternalFrame{
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 
-
-
-
-
-
-
     }
 
-
+    //public void
 }

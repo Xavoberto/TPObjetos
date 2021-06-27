@@ -40,4 +40,8 @@ public class Factura implements DocumentoRecibido {
     public double getIvaTotal(){
         return productos.stream().mapToDouble(p -> p.getIva().getValor()).sum();
     }
+
+    public OrdenDeCompra getOrdenDeCompra(){
+        return ordenDeCompra;
+    }
 }

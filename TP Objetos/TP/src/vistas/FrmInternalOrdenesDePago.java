@@ -1,5 +1,7 @@
 package vistas;
 
+import domain.controllers.FacturaController;
+
 import javax.swing.*;
 
 public class FrmInternalOrdenesDePago extends JInternalFrame {
@@ -17,5 +19,11 @@ public class FrmInternalOrdenesDePago extends JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
 
+    }
+
+    public void ConsultarOrdenesDeCompra(){
+        FacturaController facturaController = FacturaController.getInstance();
+
+        facturaController.getOrdenesDeCompra();
     }
 }

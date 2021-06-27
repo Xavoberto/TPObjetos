@@ -43,6 +43,25 @@ public class Proveedor {
         responsableIva = proveedor.getResponsableIva();
     }
 
+    public Proveedor(int cuit, ResponsableIva responsableIva, String nombreFantasia, Direccion direccion, String telefono, String correoElectronico, double numeroIngresosBrutos,
+                        LocalDateTime inicioActividades, List<Rubro> rubros, List<Certificado> certificados, CuentaCorriente cuentaCorriente,
+                        List<ProveedorProducto> proveedorProductos, List<NotaRecibida> notaRecibidas){
+
+        this.certificados = certificados;
+        this.correoElectronico = correoElectronico;
+        this.cuentaCorriente = cuentaCorriente;
+        this.inicioActividades = inicioActividades;
+        this.cuit = cuit;
+        this.direccion = direccion;
+        this.nombreFantasia = nombreFantasia;
+        this.telefono = telefono;
+        this.numeroIngresosBrutos = numeroIngresosBrutos;
+        this.rubros = rubros;
+        this.notaRecibidas = notaRecibidas;
+        this.proveedorProductos = proveedorProductos;
+        this.responsableIva = responsableIva;
+    }
+
 
     public void AltaCertificado(CertificadoDTO Certificado){
         return;
@@ -118,6 +137,10 @@ public class Proveedor {
 
     public ResponsableIva getResponsableIva() {
         return responsableIva;
+    }
+
+    public void setProveedorCuentaCorriente() {
+        this.cuentaCorriente.setProveedor(this);
     }
 }
 

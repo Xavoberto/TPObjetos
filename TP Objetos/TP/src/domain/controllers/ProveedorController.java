@@ -1,14 +1,16 @@
 package domain.controllers;
 
-import domain.entities.CuentaCorriente;
-import domain.entities.Rubro;
+import domain.entities.*;
+import domain.entities.documentos.Certificado;
+import domain.entities.documentos.Factura;
+import domain.entities.documentos.NotaRecibida;
 import domain.entities.documentos.OrdenDePago;
 import domain.entities.documentos.dtos.OrdenDePagoDTO;
 import domain.entities.entitiesDtos.CuentaCorrienteDTO;
-import domain.entities.DeudaProveedor;
-import domain.entities.Proveedor;
 import domain.entities.entitiesDtos.ProveedorDTO;
+import domain.entities.enumeraciones.ResponsableIva;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,12 @@ public class ProveedorController {
     private static ProveedorController instancia = null;
 
     private ProveedorController (){
-
+        proveedores = new ArrayList<Proveedor>();
+        proveedores.add(new Proveedor(
+            123, ResponsableIva.MONOTRIBUTO, "Proveedor de Prueba", new Direccion(), "63746397",".com",1238721,
+            LocalDateTime.now(), new ArrayList<Rubro>(), new ArrayList<Certificado>(), new CuentaCorriente(null,0,null, null,null),
+                    new ArrayList<ProveedorProducto>(), new ArrayList<NotaRecibida>()));
+        proveedores.get(0).setProveedorCuentaCorriente();
     }
 
     public static ProveedorController getInstance(){

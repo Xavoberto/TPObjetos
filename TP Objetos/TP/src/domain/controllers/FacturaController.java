@@ -2,9 +2,11 @@ package domain.controllers;
 
 import domain.entities.Proveedor;
 import domain.entities.documentos.Factura;
+import domain.entities.documentos.OrdenDeCompra;
 import domain.entities.documentos.dtos.FacturaDTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,5 +49,14 @@ public class FacturaController {
             return null;
         return optionalProveedor.get().getCuentaCorriente().TotalDeFacturas();
 
+    }
+
+    public List<OrdenDeCompra> getOrdenesDeCompra() {
+        List<OrdenDeCompra> ordenDeCompras = new ArrayList<OrdenDeCompra>();
+
+        for (Factura factura : facturas){
+            ordenDeCompras.add(factura.getOrdenDeCompra());
+        }
+        return ordenDeCompras;
     }
 }
