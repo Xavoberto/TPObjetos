@@ -34,6 +34,10 @@ public class FrmPantallaConsultasGenerales extends JDialog {
 
         this.setModal(true);
 
+        FrmInternalOrdenesDePago frameOrden = new FrmInternalOrdenesDePago("Ordenes de pago emitidas");
+        frameCuenta.setVisible(true);
+        desktopPaneOrdenesDePago.add(frameCuenta);
+
 
 
 

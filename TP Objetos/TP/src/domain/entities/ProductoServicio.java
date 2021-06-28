@@ -10,6 +10,16 @@ public class ProductoServicio {
     private String descripcion;
     private Iva iva;
 
+
+    public ProductoServicio(String nombre, TipoDeUnidad tipoDeUnidad, double precio, String descripcion, Iva iva){
+        this.nombre = nombre;
+        this.tipoDeUnidad = tipoDeUnidad;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.iva = iva;
+
+    }
+
     public double getPrecio() {
         return precio;
     }

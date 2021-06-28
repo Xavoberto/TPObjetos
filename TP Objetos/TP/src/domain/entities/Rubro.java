@@ -1,13 +1,18 @@
 package domain.entities;
 
+import domain.entities.documentos.Iva;
 import domain.entities.entitiesDtos.ProductoServicioDTO;
+import domain.entities.enumeraciones.TipoDeUnidad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rubro {
 
     private String nombre;
     private List<ProductoServicio> productoServicios;
+
+
 
     public void AltaProductoServicio(ProductoServicioDTO productoServicioDTO){
 
