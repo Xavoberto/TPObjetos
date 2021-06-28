@@ -44,4 +44,7 @@ public class Factura implements DocumentoRecibido {
     public OrdenDeCompra getOrdenDeCompra(){
         return ordenDeCompra;
     }
+
+    public List<ProductoFactura> getProductos() {return productos;
+    }
 }

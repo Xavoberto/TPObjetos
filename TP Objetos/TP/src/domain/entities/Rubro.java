@@ -13,5 +13,14 @@ public class Rubro {
 
 
     }
+    public Rubro(String nombre, List<ProductoServicio> productoServicios){
+        this.nombre = nombre;
+        this.productoServicios = productoServicios;
+    }
+
+
+    public String toString(){
+        return this.nombre;
+    }
 
 }

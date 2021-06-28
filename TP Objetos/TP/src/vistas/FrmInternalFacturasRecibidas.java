@@ -1,16 +1,20 @@
 package vistas;
 
-import javax.swing.*;
-import java.awt.*;
+import domain.controllers.FacturaController;
 
-public class FrmInternalFacturasRecibidas extends JInternalFrame{
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class FrmInternalFacturasRecibidas extends JInternalFrame {
 
     private JPanel panelPrincipal;
-    private JTextField proveedor;
+    private JTextField proveedorCuit;
     private JTextField fecha;
     private JButton buscarButton;
+    private JTextField salida;
 
-    public FrmInternalFacturasRecibidas(String titulo){
+    public FrmInternalFacturasRecibidas(String titulo) {
 
         super(titulo);
 
@@ -18,9 +22,20 @@ public class FrmInternalFacturasRecibidas extends JInternalFrame{
 
         this.setBorder(null);
 
-        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
+        buscarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                FacturaController facturaController = FacturaController.getInstance();
+
+        //No esta Terminado
+                try {
+                    salida.setText(facturaController.getFactura(Integer.parseInt(proveedorCuit.getText())).Print());
+                } catch (Exception ex) {
+                    salida.setText("Cuit no existe");
+                }
+            }
+        });
     }
-
-    //public void
 }

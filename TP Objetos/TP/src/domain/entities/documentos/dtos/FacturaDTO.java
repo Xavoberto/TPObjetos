@@ -1,6 +1,7 @@
 package domain.entities.documentos.dtos;
 
 import domain.entities.Proveedor;
+import domain.entities.documentos.Factura;
 import domain.entities.documentos.OrdenDeCompra;
 import domain.entities.documentos.ProductoFactura;
 
@@ -13,11 +14,18 @@ public class FacturaDTO {
     private LocalDate fecha;
     private List<ProductoFactura> productoFacturas;
 
-    FacturaDTO(Proveedor proveedor, OrdenDeCompra ordenDeCompra, LocalDate fecha, List<ProductoFactura>productoFacturas){
+    public FacturaDTO(Proveedor proveedor, OrdenDeCompra ordenDeCompra, LocalDate fecha, List<ProductoFactura> productoFacturas){
         this.fecha = fecha;
         this.ordenDeCompra = ordenDeCompra;
         this.productoFacturas = productoFacturas;
         this.proveedor = proveedor;
+    }
+
+    public FacturaDTO(Factura factura) {
+        proveedor = factura.getProveedor();
+        ordenDeCompra = factura.getOrdenDeCompra();
+        fecha = factura.getFecha();
+        productoFacturas = factura.getProductos();
     }
 
     public Proveedor getProveedor() {
@@ -34,5 +42,9 @@ public class FacturaDTO {
 
     public List<ProductoFactura> getProductos() {
         return productoFacturas;
+    }
+
+    public String Print() {
+        
     }
 }

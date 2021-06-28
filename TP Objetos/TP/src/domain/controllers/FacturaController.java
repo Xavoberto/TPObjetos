@@ -4,6 +4,7 @@ import domain.entities.Proveedor;
 import domain.entities.documentos.Factura;
 import domain.entities.documentos.OrdenDeCompra;
 import domain.entities.documentos.dtos.FacturaDTO;
+import domain.entities.entitiesDtos.ProveedorDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,5 +59,14 @@ public class FacturaController {
             ordenDeCompras.add(factura.getOrdenDeCompra());
         }
         return ordenDeCompras;
+    }
+
+    public FacturaDTO getFactura(int cuitProveedor) {
+        for(Factura factura : facturas){
+            if(factura.getProveedor().getCuit() == cuitProveedor)
+                return new FacturaDTO(factura);
+        }
+        return null;
+
     }
 }

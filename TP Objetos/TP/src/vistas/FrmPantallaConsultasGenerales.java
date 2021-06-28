@@ -6,11 +6,20 @@ import java.awt.*;
 public class FrmPantallaConsultasGenerales extends JDialog {
 
     private JPanel panelPrincipal;
-    private JTabbedPane tabbedPane1;
-    private JDesktopPane desktopPaneFacturasRecibidas;
-    private JDesktopPane desktopPaneCuentaCorriente;
-    private JPanel panelOrdenDePago;
-    private JDesktopPane desktopPaneOrdenesDePago;
+    private JTextField cuitProveedorFR;
+    private JButton BotonFR;
+    private JComboBox rubroCDP;
+    private JTextField productoServicioCDP;
+    private JButton botonCDP;
+    private JTextField cuitProveedorCC;
+    private JButton botonCC;
+    private JButton BotonODP;
+    private JComboBox documentoCLI;
+    private JButton botonCLI;
+    private JTextField cuitProveedorCLI;
+    private JButton botonDPP;
+    private JButton botonTDR;
+    private JTextField fechaFR;
 
     public FrmPantallaConsultasGenerales(Window owner, String titulo){
         super(owner , titulo);
@@ -24,18 +33,6 @@ public class FrmPantallaConsultasGenerales extends JDialog {
         this.setLocationRelativeTo(null); // Esto inicia la pantalla centrada
 
         this.setModal(true);
-
-
-        FrmInternalFacturasRecibidas frameFacturas = new FrmInternalFacturasRecibidas("Facturas");
-        frameFacturas.setVisible(true);
-        desktopPaneFacturasRecibidas.add(frameFacturas);
-
-
-        FrmInternalCuentaCorriente frameCuenta = new FrmInternalCuentaCorriente("Consulta Cuenta Corriente");
-        frameCuenta.setVisible(true);
-        desktopPaneCuentaCorriente.add(frameCuenta);
-
-
 
 
 
