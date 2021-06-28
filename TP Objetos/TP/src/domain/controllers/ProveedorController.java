@@ -1,10 +1,7 @@
 package domain.controllers;
 
 import domain.entities.*;
-import domain.entities.documentos.Certificado;
-import domain.entities.documentos.Factura;
-import domain.entities.documentos.NotaRecibida;
-import domain.entities.documentos.OrdenDePago;
+import domain.entities.documentos.*;
 import domain.entities.documentos.dtos.OrdenDePagoDTO;
 import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProveedorController {
 
@@ -58,6 +56,18 @@ public class ProveedorController {
         }
         return null;
     }
+
+    public List<ProveedorPrecio> ConsultaDePrecios (Rubro rubro, String nombreProducto){
+        List<ProveedorPrecio> proveedorPrecioList = new ArrayList<ProveedorPrecio>();
+        List<Proveedor>  proveedorList = this.proveedores.stream().filter(p -> p.TieneProducto(nombreProducto)).collect(Collectors.toList());
+
+        for (Proveedor proveedor: proveedorList){
+            proveedorPrecioList.add(new ProveedorPrecio(proveedor.getProducto(nombreProducto).getProductoServicio().getPrecio(),proveedor.getCuit()));
+        }
+
+        return proveedorPrecioList;
+    }
+
 
     //Lista de cuit de proveedor con su respectiva deuda
     public List<DeudaProveedor> TotalDeudaPorProveedor(){

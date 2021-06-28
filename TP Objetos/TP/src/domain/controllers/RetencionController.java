@@ -46,7 +46,8 @@ public class RetencionController {
     }
 
     public double TotalImpuestosRetenidos(){
-        return 0;
+       return this.retenciones.stream().mapToDouble(r -> r.getTotal()).sum();
+
     }
 
     public ConsultaLibroIva BuscarLibroIva(LocalDate fecha, int cuitProveedor){

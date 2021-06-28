@@ -12,4 +12,5 @@ public class CertificadoDTO {
         tipoDeRetencion = retencion;
         fecha = vencimiento;
     }
+
 }

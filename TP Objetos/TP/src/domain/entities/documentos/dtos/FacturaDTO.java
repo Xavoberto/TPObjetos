@@ -43,8 +43,5 @@ public class FacturaDTO {
     public List<ProductoFactura> getProductos() {
         return productoFacturas;
     }
-
-    public String Print() {
-        
-    }
+    
 }

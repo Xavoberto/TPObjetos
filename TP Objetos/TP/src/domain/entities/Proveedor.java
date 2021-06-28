@@ -11,6 +11,7 @@ import domain.entities.enumeraciones.ResponsableIva;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public class Proveedor {
     private int cuit;
@@ -79,8 +80,17 @@ public class Proveedor {
         return;
     }
 
-    public boolean BuscarProducto(ProductoServicio productoServicio){
-        return false;
+    public ProveedorProducto getProducto(String productoServicio){
+        Optional<ProveedorProducto> productoServicioOptional  = this.proveedorProductos.stream().filter(p -> p.getProductoServicio().getNombre() == productoServicio).findFirst();
+        if (productoServicioOptional.isPresent())
+            return productoServicioOptional.get();
+        else {
+            return null;
+        }
+    }
+
+    public boolean TieneProducto(String productoServicio){
+       return this.proveedorProductos.stream().anyMatch(p -> p.getProductoServicio().getNombre() == productoServicio);
     }
 
     public int getCuit() {
