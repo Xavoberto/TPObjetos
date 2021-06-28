@@ -28,13 +28,6 @@ public class FrmInternalFacturasRecibidas extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 FacturaController facturaController = FacturaController.getInstance();
-
-        //No esta Terminado
-                try {
-                    salida.setText(facturaController.getFactura(Integer.parseInt(proveedorCuit.getText())).Print());
-                } catch (Exception ex) {
-                    salida.setText("Cuit no existe");
-                }
             }
         });
     }

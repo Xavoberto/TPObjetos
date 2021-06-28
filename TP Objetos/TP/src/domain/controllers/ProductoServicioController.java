@@ -8,10 +8,6 @@ import domain.entities.enumeraciones.TipoDeUnidad;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class ProductoServicioController {
     private List<Rubro> rubros;
     private static ProductoServicioController instancia = null;
@@ -23,7 +19,6 @@ public class ProductoServicioController {
                 "primero", new Iva(5)));
         rubros.add(new Rubro("rubro1",productoServicios));
     }
-
 
     public static ProductoServicioController getInstance(){
         if (instancia == null){

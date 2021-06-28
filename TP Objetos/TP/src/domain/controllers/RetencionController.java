@@ -4,9 +4,12 @@ import domain.entities.*;
 import domain.entities.documentos.ConsultaLibroIva;
 import domain.entities.documentos.Factura;
 import domain.entities.documentos.Iva;
+import domain.entities.documentos.NotaRecibida;
 import domain.entities.documentos.dtos.ConsultaLibroIvaDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.entitiesDtos.RetencionDTO;
+import domain.entities.enumeraciones.TipoDocumento;
+import domain.entities.enumeraciones.TipoNota;
 import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
@@ -42,7 +45,9 @@ public class RetencionController {
 
         double monto = documentoRecibido.esFactura() ? ((Factura) documentoRecibido).getIvaTotal() : 0;
 
-         return new ConsultaLibroIvaDTO(proveedor,LocalDate.now(),documentoRecibido,new Iva(monto),documentoRecibido.getMonto());
+         return new ConsultaLibroIvaDTO(proveedor,LocalDate.now(),
+                 documentoRecibido.esFactura() ? TipoDocumento.Factura : ((NotaRecibida)documentoRecibido).getNotaDe() == TipoNota.CREDITO ? TipoDocumento.NotaCredito : TipoDocumento.NotaDebito,
+                 new Iva(monto),documentoRecibido.getMonto());
     }
 
     public double TotalImpuestosRetenidos(){
