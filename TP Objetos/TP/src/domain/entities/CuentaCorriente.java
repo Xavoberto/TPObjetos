@@ -75,4 +75,6 @@ public class CuentaCorriente {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
+
+
 }

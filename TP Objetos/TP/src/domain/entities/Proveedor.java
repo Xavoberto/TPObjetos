@@ -1,6 +1,7 @@
 package domain.entities;
 
 import domain.entities.documentos.Certificado;
+import domain.entities.documentos.OrdenDePago;
 import domain.entities.documentos.dtos.CertificadoDTO;
 import domain.entities.documentos.NotaRecibida;
 import domain.entities.documentos.dtos.NotaRecibidaDTO;
@@ -152,5 +153,7 @@ public class Proveedor {
     public void setProveedorCuentaCorriente() {
         this.cuentaCorriente.setProveedor(this);
     }
+
+
 }
 

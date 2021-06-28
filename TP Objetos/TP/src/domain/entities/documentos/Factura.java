@@ -21,6 +21,14 @@ public class Factura implements DocumentoRecibido {
 
     }
 
+    public Factura(Proveedor proveedor, OrdenDeCompra ordenDeCompra, LocalDate fecha, List<ProductoFactura> productoFacturas){
+        this.fecha = fecha;
+        this.ordenDeCompra = ordenDeCompra;
+        this.productos = productoFacturas;
+        this.proveedor = proveedor;
+    }
+
+
     public double getMonto(){
         return productos.stream().mapToDouble(p -> p.getPrecio()).sum();
     }

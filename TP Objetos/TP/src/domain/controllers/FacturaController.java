@@ -16,6 +16,8 @@ public class FacturaController {
     private static FacturaController instancia = null;
 
     private FacturaController (){
+        facturas = new ArrayList<Factura>();
+
 
     }
 
