@@ -18,7 +18,6 @@ public class FacturaController {
     private FacturaController (){
         facturas = new ArrayList<Factura>();
 
-
     }
 
     public static FacturaController getInstance(){

@@ -24,4 +24,7 @@ public class Rubro {
         return this.nombre;
     }
 
+    public String toString(){
+        return this.nombre;
+    }
 }
