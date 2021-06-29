@@ -123,11 +123,6 @@ public class FrmPantallaOtros extends JDialog{
 
                 proveedorController.AltaProveedorProducto(proveedor, productoServicio, precioAcordado);
 
-
-
-
-
-
             }
         });
 
@@ -141,8 +136,6 @@ public class FrmPantallaOtros extends JDialog{
                 if (!Objects.equals(nombre, "")) {
                     productoServicioController.AltaRubro(nombre);
                 }
-
-
 
             }
         });

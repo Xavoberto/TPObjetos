@@ -14,17 +14,14 @@ public class Rubro {
     private List<ProductoServicio> productoServicios;
 
 
-
     public Rubro(String nombre, List<ProductoServicio> productoServicios){
         this.nombre = nombre;
         this.productoServicios = productoServicios;
     }
     public Rubro(String nombre){
         this.nombre = nombre;
-        this.productoServicios = null;
-
+        this.productoServicios = new ArrayList<ProductoServicio>();
     }
-
 
     public String getNombre(){
         return this.nombre;
@@ -45,5 +42,9 @@ public class Rubro {
 
     public List<ProductoServicio> getProductoServicios(){
         return productoServicios;
+    }
+
+    public String toString(){
+        return nombre;
     }
 }

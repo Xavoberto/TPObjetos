@@ -34,12 +34,6 @@ public class ProductoServicio {
         this.precio = Double.parseDouble(PS[1]);
         this.descripcion = PS[2];
         this.iva = new Iva(Double.parseDouble(PS[3]));
-
-
-
-
-
-
     }
 
     public double getPrecio() {
@@ -60,5 +54,9 @@ public class ProductoServicio {
 
     public Iva getIva() {
         return iva;
+    }
+
+    public String toString(){
+        return nombre;
     }
 }

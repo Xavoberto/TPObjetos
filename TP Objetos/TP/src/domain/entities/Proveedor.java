@@ -169,4 +169,8 @@ public class Proveedor {
     public void setProveedorCuentaCorriente() {
         this.cuentaCorriente.setProveedor(this);
     }
+
+    public String toString(){
+        return "" + cuit;
+    }
 }
