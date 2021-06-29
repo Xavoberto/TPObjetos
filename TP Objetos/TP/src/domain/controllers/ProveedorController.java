@@ -35,12 +35,14 @@ public class ProveedorController {
         proveedorProductos.add(new ProveedorProducto(null, new ProductoServicio("test", TipoDeUnidad.UNIDAD,21,"",new Iva(5)),21));
         List<Rubro> rubros = new ArrayList<Rubro>();
         rubros.add(productoServicioController.getRubros().get(0));
+        List<Factura> facturasProveedor = new ArrayList<Factura>();
+        facturasProveedor.add(new Factura(null,new OrdenDeCompra(),LocalDate.now(),productoFacturas));
 
         ordenDePagoList.add(new OrdenDePago(0, FormaDePago.EFECTIVO, null ,  documentoRecibidos ));
         proveedores.add(new Proveedor(
             123, ResponsableIva.MONOTRIBUTO, "Proveedor de Prueba", new Direccion(), "63746397",".com",1238721,
             LocalDateTime.now(),rubros , new ArrayList<Certificado>(), new CuentaCorriente(null,0,new ArrayList<NotaRecibida>(),
-                new ArrayList<Factura>(),new ArrayList<OrdenDePago>()), proveedorProductos, new ArrayList<NotaRecibida>()));
+                facturasProveedor,new ArrayList<OrdenDePago>()), proveedorProductos, new ArrayList<NotaRecibida>()));
 
         proveedores.get(0).setProveedorCuentaCorriente();
         documentoRecibidos.add(new Factura(proveedores.get(0), null, LocalDate.now(), productoFacturas ));
@@ -136,5 +138,9 @@ public class ProveedorController {
             respuesta += ordenDePago.Print();
         }
         return respuesta;
+    }
+
+    public List<Factura> DocumentosConsultaLibroIva(int cuitProveedor) {
+        return getProveedor(cuitProveedor).getCuentaCorriente().getDocumentoImpago();
     }
 }

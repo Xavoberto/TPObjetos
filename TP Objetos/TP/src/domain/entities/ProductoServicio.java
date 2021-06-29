@@ -1,6 +1,7 @@
 package domain.entities;
 
 import domain.entities.documentos.Iva;
+import domain.entities.entitiesDtos.ProductoServicioDTO;
 import domain.entities.enumeraciones.TipoDeUnidad;
 
 public class ProductoServicio {
@@ -17,7 +18,14 @@ public class ProductoServicio {
         this.precio = precio;
         this.descripcion = descripcion;
         this.iva = iva;
+    }
 
+    public ProductoServicio(ProductoServicioDTO productoServicioDTO){
+        this.nombre = productoServicioDTO.getNombre();
+        this.tipoDeUnidad = productoServicioDTO.getTipoDeUnidad();
+        this.precio = productoServicioDTO.getPrecio();
+        this.descripcion = productoServicioDTO.getDescripcion();
+        this.iva = iva;
     }
 
     public double getPrecio() {

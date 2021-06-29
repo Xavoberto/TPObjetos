@@ -22,4 +22,9 @@ public class ConsultaLibroIvaDTO {
         this.tipoDocumento = tipoDocumento;
         this.total = total;
     }
+
+    public String Print() {
+        return  "Cuit del proveedor: " + proveedor.getCuit() + ", Nombre: " + proveedor.getNombre() + ", Fecha: " + fecha + ", Tipo de documento: " + tipoDocumento +
+                ", Iva: " + iva + ", Total: " + total + ".";
+    }
 }

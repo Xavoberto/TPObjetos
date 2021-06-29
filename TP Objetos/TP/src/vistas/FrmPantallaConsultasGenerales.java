@@ -6,9 +6,11 @@ import domain.controllers.ProveedorController;
 import domain.controllers.RetencionController;
 import domain.entities.Proveedor;
 import domain.entities.Rubro;
+import domain.entities.documentos.Factura;
 import domain.entities.documentos.ProveedorPrecio;
 import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
+import domain.entities.interfaces.DocumentoRecibido;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,10 +72,11 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                 double totalAImprimir = 0;
                 boolean cuitEntered = false;
                 boolean dateEntered = false;
+                int cuitProveedor = 0;
                 LocalDate fecha = LocalDate.now();
 
                 try{
-                    Integer.parseInt(cuitProveedorFR.getText());
+                    cuitProveedor = Integer.parseInt(cuitProveedorFR.getText());
                     cuitEntered = true;
                 }
                 catch (Exception ex){
@@ -90,15 +93,14 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                     return;
 
                 if(cuitEntered && dateEntered){
-                    totalAImprimir = facturaController.TotalDeFacturas(fecha, Integer.parseInt(cuitProveedorFR.getText()));
+                    totalAImprimir = facturaController.TotalDeFacturas(fecha, cuitProveedor);
                 }
                 else{
                     if(dateEntered){
-                        fecha = LocalDate.parse(fechaFR.getText());
                         totalAImprimir = facturaController.TotalDeFacturas(fecha);
                     }
                     if(cuitEntered){
-                        totalAImprimir = facturaController.TotalDeFacturas(Integer.parseInt(cuitProveedorFR.getText()));
+                        totalAImprimir = facturaController.TotalDeFacturas(cuitProveedor);
                     }
                 }
                 try {
@@ -123,7 +125,6 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                     for (ProveedorPrecio proveedorPrecio : proveedorPrecioList) {
                         respuesta += proveedorPrecio.Print() + "   /n  ";
                     }
-                    ;
                 }
                 else
                     respuesta = "El producto indicado no existe";
@@ -133,7 +134,7 @@ public class FrmPantallaConsultasGenerales extends JDialog {
         });
 
 
-        //---------------------------------CUENTA CORRIENTE--------------------------------------------------------deuda, documentos recibidos, documentos impagos y pagos realizados.
+        //---------------------------------CUENTA CORRIENTE--------------------------------------------------------
         botonCC.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -165,6 +166,29 @@ public class FrmPantallaConsultasGenerales extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(null, retencionController.TotalImpuestosRetenidos());
+            }
+        });
+
+        //---------------------------------CONSULTA LIBRO IVA--------------------------------------------------------
+        buscarDocumentosButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                List<Factura> documentoRecibidos = proveedorController.DocumentosConsultaLibroIva(Integer.parseInt(cuitProveedorCLI.getText()));
+
+                DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+                for (DocumentoRecibido documentoRecibido : documentoRecibidos){
+                    model.addElement(documentoRecibido);
+                }
+
+                documentoCLI.setModel(model);
+            }
+        });
+        botonCLI.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, retencionController.ConsultaLibroIva(Integer.parseInt(cuitProveedorCLI.getText()),
+                        (DocumentoRecibido)documentoCLI.getSelectedItem()));
             }
         });
     }

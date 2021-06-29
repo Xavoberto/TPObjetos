@@ -25,4 +25,12 @@ public class ProductoServicioDTO {
     public double getPrecio() {
         return precio;
     }
+
+    public TipoDeUnidad getTipoDeUnidad() {
+        return tipoDeUnidad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
 }

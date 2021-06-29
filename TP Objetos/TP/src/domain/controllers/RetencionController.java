@@ -41,7 +41,7 @@ public class RetencionController {
         return retencion;
     }
 
-    public ConsultaLibroIvaDTO ConsultaLibroIva(int cuitProveedor, DocumentoRecibido documentoRecibido){
+    public String ConsultaLibroIva(int cuitProveedor, DocumentoRecibido documentoRecibido){
         ProveedorController proveedorController = ProveedorController.getInstance();
         ProveedorDTO proveedor = proveedorController.getProveedor(cuitProveedor);
 
@@ -49,7 +49,7 @@ public class RetencionController {
 
          return new ConsultaLibroIvaDTO(proveedor,LocalDate.now(),
                  documentoRecibido.esFactura() ? TipoDocumento.Factura : ((NotaRecibida)documentoRecibido).getNotaDe() == TipoNota.CREDITO ? TipoDocumento.NotaCredito : TipoDocumento.NotaDebito,
-                 new Iva(monto),documentoRecibido.getMonto());
+                 new Iva(monto),documentoRecibido.getMonto()).Print();
     }
 
     public double TotalImpuestosRetenidos(){
