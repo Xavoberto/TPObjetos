@@ -19,6 +19,11 @@ public class Rubro {
         this.nombre = nombre;
         this.productoServicios = productoServicios;
     }
+    public Rubro(String nombre){
+        this.nombre = nombre;
+        this.productoServicios = null;
+
+    }
 
 
     public String getNombre(){
@@ -33,7 +38,7 @@ public class Rubro {
             return true;
 
         }catch (Exception ex){
-            JOptionPane.showMessageDialog(null,"producto no exite");
+            JOptionPane.showMessageDialog(null,"El producto no se pudo crear");
             return false;
         }
     }

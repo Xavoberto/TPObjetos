@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.TileObserver;
+import java.util.Objects;
 
 public class FrmPantallaOtros extends JDialog{
 
@@ -31,7 +32,7 @@ public class FrmPantallaOtros extends JDialog{
     private JButton ingresarButton1;
     private JComboBox cuitProveedorAC;
     private JComboBox retencionAC;
-    private JTextField textField5;
+    private JTextField nombreRubro;
     private JButton ingresarButton;
     private JComboBox rubroAPS;
     private JComboBox tipoDeUnidadAPS;
@@ -41,7 +42,7 @@ public class FrmPantallaOtros extends JDialog{
 
         this.setContentPane(panelPrincipal);
 
-        this.setSize(1000, 800);
+        this.setSize(1200, 800);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // se libera cuando se cierra
 
@@ -80,12 +81,15 @@ public class FrmPantallaOtros extends JDialog{
 
         DefaultComboBoxModel modeloProductoServ = new DefaultComboBoxModel();
 
-        /**for(ProductoServicio productoServicio : ){
-            modeloProductoServ.addElement(productoServicio);
-        }
+        for(Rubro rubro : productoServicioController.getRubros())
+            for(ProductoServicio productoServicio : rubro.getProductoServicios()){
+                modeloProductoServ.addElement(productoServicio);
+            }
+
         productoServicioPP.setModel(modeloProductoServ);
-        **/
+
         //----------------------------------Alta Producto Servicio---------------------------------------------
+
         botonIngresarPS.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -99,13 +103,45 @@ public class FrmPantallaOtros extends JDialog{
             }
         });
 
+        //-----------------------------------Alta Proveedor Producto--------------------------------------------
 
         botonIngresarPP.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String precioAcordado = precioAcordadoPP.getText();
+                 double precioAcordado = 0;
+                try {
+                    precioAcordado = Double.parseDouble(precioAcordadoPP.getText());
+
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null,"Ingrese datos validos");
+                    return;
+                }
+
+
                 Proveedor proveedor = (Proveedor)proveedorPP.getSelectedItem();
                 ProductoServicio productoServicio = (ProductoServicio)productoServicioPP.getSelectedItem();
+
+                proveedorController.AltaProveedorProducto(proveedor, productoServicio, precioAcordado);
+
+
+
+
+
+
+            }
+        });
+
+        //---------------------------------------Alta Rubro-----------------------------------------------------
+        ingresarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+
+                String nombre = nombreRubro.getText();
+                if (!Objects.equals(nombre, "")) {
+                    productoServicioController.AltaRubro(nombre);
+                }
+
 
 
             }

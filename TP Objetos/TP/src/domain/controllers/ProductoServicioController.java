@@ -5,6 +5,7 @@ import domain.entities.Rubro;
 import domain.entities.documentos.Iva;
 import domain.entities.enumeraciones.TipoDeUnidad;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,9 +33,26 @@ public class ProductoServicioController {
         return rubros;
     }
 
+
+
     public boolean AltaProductoServicio(Rubro rubro,TipoDeUnidad tipoDeUnidad,String[] ps){
        Rubro rubro2 = getRubros().stream().filter(r -> Objects.equals(r.getNombre(),rubro.getNombre())).findFirst().get();
-        return rubro.AltaProductoServicio(tipoDeUnidad, ps);
+        return rubro2.AltaProductoServicio(tipoDeUnidad, ps);
+    }
+
+    public boolean AltaRubro(String nombre){
+        try{
+            rubros.add(new Rubro(nombre));
+
+            JOptionPane.showMessageDialog(null,"Rubro creado");
+            return true;
+
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"El rubro no se pudo crear");
+            return false;
+
+        }
+
     }
 
 }

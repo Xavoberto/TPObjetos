@@ -10,6 +10,7 @@ import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.entitiesDtos.ProveedorProductoDTO;
 import domain.entities.enumeraciones.ResponsableIva;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
@@ -81,6 +82,18 @@ public class Proveedor {
 
     public void AltaProveedorProducto(ProveedorProductoDTO ProveedorProducto){
         return;
+    }
+
+    public boolean AltaProveedorProducto(ProductoServicio productoServicio, double precio){
+        try{
+            proveedorProductos.add(new ProveedorProducto(productoServicio,precio));
+            JOptionPane.showMessageDialog(null,"Proveedor Producto Creado");
+            return true;
+
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"El Proveedor Producto no pudo ser creado");
+            return false;
+        }
     }
 
     public ProveedorProducto getProducto(String productoServicio){

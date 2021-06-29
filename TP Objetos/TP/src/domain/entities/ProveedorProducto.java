@@ -12,6 +12,10 @@ public class ProveedorProducto {
         this.proveedor = proveedor;
         this.producto = productoServicio;
     }
+    public ProveedorProducto(ProductoServicio productoServicio, double precio){
+        this.producto = productoServicio;
+        this.precio = precio;
+    }
 
     public ProductoServicioDTO getProductoServicio(){
          return new ProductoServicioDTO(producto.getNombre(),producto.getTipoDeUnidad(),producto.getPrecio(),producto.getDescripcion(),producto.getIva());

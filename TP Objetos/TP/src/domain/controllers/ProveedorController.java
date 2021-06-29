@@ -148,4 +148,11 @@ public class ProveedorController {
     }
 
 
+    public boolean AltaProveedorProducto(Proveedor proveedor, ProductoServicio productoServicio, Double precioAcordado) {
+
+        Proveedor proveedor1 = getProveedoresParaPantalla().stream().filter(p -> Objects.equals(p.getCuit(),proveedor.getCuit())).findFirst().get();
+        return proveedor1.AltaProveedorProducto(productoServicio,precioAcordado);
+
+
+    }
 }
