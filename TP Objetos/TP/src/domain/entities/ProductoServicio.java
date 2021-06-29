@@ -28,6 +28,20 @@ public class ProductoServicio {
         this.iva = iva;
     }
 
+    public ProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS){
+        this.nombre = PS[0];
+        this.tipoDeUnidad = tipoDeUnidad;
+        this.precio = Double.parseDouble(PS[1]);
+        this.descripcion = PS[2];
+        this.iva = new Iva(Double.parseDouble(PS[3]));
+
+
+
+
+
+
+    }
+
     public double getPrecio() {
         return precio;
     }

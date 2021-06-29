@@ -4,6 +4,7 @@ import domain.entities.documentos.Iva;
 import domain.entities.entitiesDtos.ProductoServicioDTO;
 import domain.entities.enumeraciones.TipoDeUnidad;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +26,19 @@ public class Rubro {
     }
 
 
-    public boolean AltaProductoServicio(String[] PS){
+    public boolean AltaProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS){
         try {
-            productoServicios.add(new ProductoServicio(PS));
+            productoServicios.add(new ProductoServicio(tipoDeUnidad, PS));
+            JOptionPane.showMessageDialog(null,"producto creado");
             return true;
+
         }catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"producto no exite");
             return false;
         }
+    }
+
+    public List<ProductoServicio> getProductoServicios(){
+        return productoServicios;
     }
 }

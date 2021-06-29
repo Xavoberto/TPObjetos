@@ -109,6 +109,9 @@ public class ProveedorController {
         }
         return null;
     }
+    public List<Proveedor> getProveedoresParaPantalla(){
+        return proveedores;
+    }
 
     public ProveedorDTO getProveedor(Rubro rubro){
         for(Proveedor proveedor : proveedores){
@@ -143,4 +146,6 @@ public class ProveedorController {
     public List<Factura> DocumentosConsultaLibroIva(int cuitProveedor) {
         return getProveedor(cuitProveedor).getCuentaCorriente().getDocumentoImpago();
     }
+
+
 }
