@@ -3,9 +3,11 @@ package vistas;
 import domain.controllers.FacturaController;
 import domain.controllers.ProductoServicioController;
 import domain.controllers.ProveedorController;
+import domain.controllers.RetencionController;
 import domain.entities.Proveedor;
 import domain.entities.Rubro;
 import domain.entities.documentos.ProveedorPrecio;
+import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 
 import javax.swing.*;
@@ -33,6 +35,7 @@ public class FrmPantallaConsultasGenerales extends JDialog {
     private JButton botonDPP;
     private JButton botonTDR;
     private JTextField fechaFR;
+    private JButton buscarDocumentosButton;
 
     public FrmPantallaConsultasGenerales(Window owner, String titulo){
         super(owner , titulo);
@@ -47,9 +50,10 @@ public class FrmPantallaConsultasGenerales extends JDialog {
 
         this.setModal(true);
 
-        ProveedorController proveedorController = ProveedorController.getInstance();
         ProductoServicioController productoServicioController = ProductoServicioController.getInstance();
+        ProveedorController proveedorController = ProveedorController.getInstance();
         FacturaController facturaController = FacturaController.getInstance();
+        RetencionController retencionController = RetencionController.getInstance();
 
         DefaultComboBoxModel model = new DefaultComboBoxModel();
 
@@ -59,7 +63,7 @@ public class FrmPantallaConsultasGenerales extends JDialog {
 
         rubroCDP.setModel(model);
 
-//--------------------------------------- FACTURAS RECIBIDAS---------------------------------------------------------------------------
+//--------------------------------------- FACTURAS RECIBIDAS--------------------------------------------------------------------------
         BotonFR.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -68,13 +72,22 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                 boolean dateEntered = false;
                 LocalDate fecha = LocalDate.now();
 
-                if(cuitProveedorFR.getText() != ""){
+                try{
+                    Integer.parseInt(cuitProveedorFR.getText());
                     cuitEntered = true;
                 }
-                if(LocalDate.parse(fechaFR.getText()) != null){
-                    dateEntered = true;
-                    fecha = LocalDate.parse(fechaFR.getText());
+                catch (Exception ex){
+                    cuitEntered = false;
                 }
+                try{
+                    fecha = LocalDate.parse(fechaFR.getText());
+                    dateEntered = true;
+                }
+                catch (Exception ex){
+                    dateEntered = false;
+                }
+                if(!cuitEntered && !dateEntered)
+                    return;
 
                 if(cuitEntered && dateEntered){
                     totalAImprimir = facturaController.TotalDeFacturas(fecha, Integer.parseInt(cuitProveedorFR.getText()));
@@ -106,11 +119,52 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                 proveedorPrecioList = proveedorController.ConsultaDePrecios(rubro, productoServicioCDP.getText());
                 String respuesta = "";
 
-                        for(ProveedorPrecio proveedorPrecio : proveedorPrecioList){
-                            respuesta += proveedorPrecio.Print() + "   /n  ";
-                        };
+                if(!proveedorPrecioList.isEmpty()) {
+                    for (ProveedorPrecio proveedorPrecio : proveedorPrecioList) {
+                        respuesta += proveedorPrecio.Print() + "   /n  ";
+                    }
+                    ;
+                }
+                else
+                    respuesta = "El producto indicado no existe";
 
                 JOptionPane.showMessageDialog(null, respuesta);
+            }
+        });
+
+
+        //---------------------------------CUENTA CORRIENTE--------------------------------------------------------deuda, documentos recibidos, documentos impagos y pagos realizados.
+        botonCC.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                CuentaCorrienteDTO cuentaCorrienteDTO = proveedorController.ConsultaCuentaCorriente(Integer.parseInt(cuitProveedorCC.getText()));
+                JOptionPane.showMessageDialog(null, cuentaCorrienteDTO.Print());
+            }
+        });
+
+
+        //---------------------------------ORDENES DE PAGO--------------------------------------------------------
+        BotonODP.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null,proveedorController.OrdenesDePagoEmitidas());
+            }
+        });
+
+
+        //---------------------------------DEUDA POR PROVEEDOR--------------------------------------------------------
+        botonDPP.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, proveedorController.TotalDeudaPorProveedor());
+            }
+        });
+
+        //---------------------------------IMPUESTOS RETENIDOS  --------------------------------------------------------
+        botonTDR.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, retencionController.TotalImpuestosRetenidos());
             }
         });
     }

@@ -38,7 +38,7 @@ public class Retencion {
         double iva = 0;
 
         List<Certificado> certificados = proveedor.getCertificados();
-        double ivaPagado = ((List<Factura>) documentoRecibidos.stream().filter(d -> d.esFactura())).stream().mapToDouble(factura -> factura.getIvaTotal()).sum();
+        double ivaPagado = documentoRecibidos.stream().filter(d -> d.esFactura()).mapToDouble(factura -> ((Factura)factura).getIvaTotal()).sum();
 
         if(certificados.isEmpty()){
             return (total * (38.5 / 100)) + ivaPagado;

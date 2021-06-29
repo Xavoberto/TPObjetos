@@ -19,7 +19,7 @@ public class ProveedorDTO{
     private LocalDateTime inicioActividades;
     private List<Rubro> rubros;
     private List<Certificado> certificados;
-    private CuentaCorriente cuentaCorriente;
+    private CuentaCorrienteDTO cuentaCorriente;
     private List<ProveedorProducto> proveedorProductos;
     private List<NotaRecibida> notaRecibidas;
 
@@ -29,7 +29,7 @@ public class ProveedorDTO{
 
         this.certificados = certificados;
         this.correoElectronico = correoElectronico;
-        this.cuentaCorriente = cuentaCorriente;
+        this.cuentaCorriente = new CuentaCorrienteDTO(cuentaCorriente);
         this.inicioActividades = inicioActividades;
         this.cuit = cuit;
         this.direccion = direccion;
@@ -44,7 +44,7 @@ public class ProveedorDTO{
     public ProveedorDTO(Proveedor proveedor){
         certificados = proveedor.getCertificados();
         correoElectronico = proveedor.getCorreoElectronico();
-        cuentaCorriente = proveedor.getCuentaCorriente();
+        cuentaCorriente = new CuentaCorrienteDTO(proveedor.getCuentaCorriente());
         inicioActividades = proveedor.getInicioActividades();
         cuit = proveedor.getCuit();
         direccion = proveedor.getDireccion();
@@ -61,7 +61,7 @@ public class ProveedorDTO{
         return cuit;
     }
 
-    public CuentaCorriente getCuentaCorriente() {
+    public CuentaCorrienteDTO getCuentaCorriente() {
         return cuentaCorriente;
     }
 

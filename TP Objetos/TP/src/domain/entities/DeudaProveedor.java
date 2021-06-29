@@ -9,4 +9,8 @@ public class DeudaProveedor {
         cuitProveedor = cuit;
         deudaTotal = deuda;
     }
+
+    public String Print() {
+        return "Cuit Proveedor: " + cuitProveedor + ", Deuda Total: " + deudaTotal + ".   ";
+    }
 }

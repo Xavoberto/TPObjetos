@@ -13,6 +13,7 @@ import domain.entities.enumeraciones.TipoNota;
 import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,8 @@ public class RetencionController {
     private static RetencionController instancia = null;
 
     private RetencionController (){
-
+        retenciones = new ArrayList<Retencion>();
+        librosIva = new ArrayList<ConsultaLibroIva>();
     }
 
     public static RetencionController getInstance(){

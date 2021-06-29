@@ -30,4 +30,28 @@ public class CuentaCorrienteDTO {
         this.documentosImpagos = cuentaCorriente.getDocumentoImpago();
         this.pagosRealizados = cuentaCorriente.getPagosRealizados();
     }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public double getDeuda() {
+        return deuda;
+    }
+
+    public List<NotaRecibida> getDocumentoRecibido() {
+        return documentosRecibidos;
+    }
+
+    public List<Factura> getDocumentoImpago() {
+        return documentosImpagos;
+    }
+
+    public List<OrdenDePago> getPagosRealizados() {
+        return pagosRealizados;
+    }
+
+    public String Print() {
+        return "Nombre: " + proveedor.getNombre() + "  Deuda: " + deuda;
+    }
 }

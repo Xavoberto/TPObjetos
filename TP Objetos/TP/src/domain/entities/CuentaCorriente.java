@@ -5,6 +5,7 @@ import domain.entities.documentos.Factura;
 import domain.entities.documentos.NotaRecibida;
 import domain.entities.documentos.OrdenDePago;
 import domain.entities.documentos.dtos.OrdenDePagoDTO;
+import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.RetencionDTO;
 import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.interfaces.DocumentoRecibido;
@@ -26,6 +27,14 @@ public class CuentaCorriente {
         this.documentosRecibidos = documentoRecibidos;
         this.documentosImpagos = facturas;
         this.pagosRealizados = pagosRealizados;
+    }
+
+    public CuentaCorriente(CuentaCorrienteDTO cuentaCorriente) {
+        this.proveedor = cuentaCorriente.getProveedor();
+        this.deuda = cuentaCorriente.getDeuda();
+        this.documentosRecibidos = cuentaCorriente.getDocumentoRecibido();
+        this.documentosImpagos = cuentaCorriente.getDocumentoImpago();
+        this.pagosRealizados = cuentaCorriente.getPagosRealizados();
     }
 
     public double TotalDeFacturas(){

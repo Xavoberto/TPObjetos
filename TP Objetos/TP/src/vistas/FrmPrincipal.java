@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class FrmPrincipal extends JFrame {
     private JPanel panelPrincipal;
     private JPanel titulo;
@@ -29,20 +28,15 @@ public class FrmPrincipal extends JFrame {
 
         this.self = this;
 
-
     }
 
     private void asociarEventos() {
-
 
         consultasGenerales.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmPantallaConsultasGenerales frame = new FrmPantallaConsultasGenerales(self,"Consultas Generales" );
                 frame.setVisible(true);
-
-
-
 
             }
         });
@@ -58,13 +52,10 @@ public class FrmPrincipal extends JFrame {
         });
     }
 
-
-
     public static void main(String[] args) {
         FrmPrincipal frame = new FrmPrincipal("Pantalla SWING");
 
         frame.setVisible(true);
-
 
     }
 }

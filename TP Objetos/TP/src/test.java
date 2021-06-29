@@ -21,7 +21,7 @@ public class test {
 
         List<OrdenDePago> ordenDePagoList = null;
 
-        ordenDePagoList.addAll(proveedorController.getProveedor(123).getCuentaCorriente().getPagosRealizados());
+        ordenDePagoList.addAll(new CuentaCorriente(proveedorController.getProveedor(123).getCuentaCorriente()).getPagosRealizados());
 
         System.out.println(ordenDePagoList.stream().findFirst().get().getTotal());
     }

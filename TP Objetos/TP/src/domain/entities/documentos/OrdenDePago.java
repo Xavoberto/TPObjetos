@@ -42,4 +42,8 @@ public class OrdenDePago {
     public Retencion getRetencion() {
         return totalRetencion;
     }
+
+    public String Print() {
+        return "Total: " + total + "  Forma de Pago: " + formaDePago + " Total de retencion: " + totalRetencion + ".      ";
+    }
 }

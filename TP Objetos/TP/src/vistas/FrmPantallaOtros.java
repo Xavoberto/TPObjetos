@@ -6,7 +6,10 @@ import java.awt.*;
 public class FrmPantallaOtros extends JDialog{
 
     private JPanel panelPrincipal;
-    private JTabbedPane tabbedPane1;
+    private JTextField proveedorField;
+    private JButton proveedorButton;
+    private JTextField facturaField;
+    private JButton facturaButton;
 
     public FrmPantallaOtros(Window owner, String titulo){
         super(owner , titulo);
