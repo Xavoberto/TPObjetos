@@ -12,6 +12,8 @@ import domain.entities.enumeraciones.ResponsableIva;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Proveedor {
@@ -82,7 +84,8 @@ public class Proveedor {
     }
 
     public ProveedorProducto getProducto(String productoServicio){
-        Optional<ProveedorProducto> productoServicioOptional  = this.proveedorProductos.stream().filter(p -> p.getProductoServicio().getNombre() == productoServicio).findFirst();
+        Optional<ProveedorProducto> productoServicioOptional  = this.proveedorProductos.stream().filter(p ->
+                Objects.equals(p.getProductoServicio().getNombre().toLowerCase(),productoServicio.toLowerCase())).findFirst();
         if (productoServicioOptional.isPresent())
             return productoServicioOptional.get();
         else {
@@ -91,7 +94,7 @@ public class Proveedor {
     }
 
     public boolean TieneProducto(String productoServicio){
-       return this.proveedorProductos.stream().anyMatch(p -> p.getProductoServicio().getNombre() == productoServicio);
+       return this.proveedorProductos.stream().anyMatch(p -> Objects.equals(p.getProductoServicio().getNombre().toLowerCase(), productoServicio.toLowerCase()));
     }
 
     public int getCuit() {
@@ -153,7 +156,5 @@ public class Proveedor {
     public void setProveedorCuentaCorriente() {
         this.cuentaCorriente.setProveedor(this);
     }
-
-
 }
 

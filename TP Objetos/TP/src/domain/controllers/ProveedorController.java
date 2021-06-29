@@ -7,6 +7,7 @@ import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.enumeraciones.ResponsableIva;
+import domain.entities.enumeraciones.TipoDeUnidad;
 import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class ProveedorController {
 
     private List<Proveedor> proveedores;
     private static ProveedorController instancia = null;
+    private ProductoServicioController productoServicioController = ProductoServicioController.getInstance();
 
     private ProveedorController (){
         proveedores = new ArrayList<Proveedor>();
@@ -28,16 +30,20 @@ public class ProveedorController {
         List<DocumentoRecibido> documentoRecibidos = new ArrayList<DocumentoRecibido>();
         List<ProductoFactura> productoFacturas = new ArrayList<ProductoFactura>();
         productoFacturas.add(new ProductoFactura( "productofac1", 2, "prod1",new Iva(5)));
+        List<ProveedorProducto> proveedorProductos = new ArrayList<ProveedorProducto>();
+        proveedorProductos.add(new ProveedorProducto(null, new ProductoServicio("test", TipoDeUnidad.UNIDAD,21,"",new Iva(5)),21));
+        List<Rubro> rubros = new ArrayList<Rubro>();
+        rubros.add(productoServicioController.getRubros().get(0));
 
-        ordenDePagoList.add(new OrdenDePago(0, null, null ,  documentoRecibidos ));
+        ordenDePagoList.add(new OrdenDePago(0, FormaDePago.EFECTIVO, null ,  documentoRecibidos ));
         proveedores.add(new Proveedor(
             123, ResponsableIva.MONOTRIBUTO, "Proveedor de Prueba", new Direccion(), "63746397",".com",1238721,
-            LocalDateTime.now(), new ArrayList<Rubro>(), new ArrayList<Certificado>(), new CuentaCorriente(null,0,null, null,null),
-                    new ArrayList<ProveedorProducto>(), new ArrayList<NotaRecibida>()));
+            LocalDateTime.now(),rubros , new ArrayList<Certificado>(), new CuentaCorriente(null,0,new ArrayList<NotaRecibida>(),
+                new ArrayList<Factura>(),new ArrayList<OrdenDePago>()), proveedorProductos, new ArrayList<NotaRecibida>()));
+
         proveedores.get(0).setProveedorCuentaCorriente();
         documentoRecibidos.add(new Factura(proveedores.get(0), null, LocalDate.now(), productoFacturas ));
         proveedores.get(0).getCuentaCorriente().RealizarPago(FormaDePago.EFECTIVO,documentoRecibidos);
-
     }
 
     public static ProveedorController getInstance(){
@@ -71,7 +77,7 @@ public class ProveedorController {
 
     public List<ProveedorPrecio> ConsultaDePrecios (Rubro rubro, String nombreProducto){
         List<ProveedorPrecio> proveedorPrecioList = new ArrayList<ProveedorPrecio>();
-        List<Proveedor>  proveedorList = this.proveedores.stream().filter(p -> p.TieneProducto(nombreProducto)).collect(Collectors.toList());
+        List<Proveedor> proveedorList = this.proveedores.stream().filter(p -> p.TieneProducto(nombreProducto)).collect(Collectors.toList());
 
         for (Proveedor proveedor: proveedorList){
             proveedorPrecioList.add(new ProveedorPrecio(proveedor.getProducto(nombreProducto).getProductoServicio().getPrecio(),proveedor.getCuit()));

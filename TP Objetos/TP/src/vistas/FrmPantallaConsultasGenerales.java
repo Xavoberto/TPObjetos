@@ -33,6 +33,7 @@ public class FrmPantallaConsultasGenerales extends JDialog {
     private JButton botonDPP;
     private JButton botonTDR;
     private JTextField fechaFR;
+    private JButton buscarDocumentosButton;
 
     public FrmPantallaConsultasGenerales(Window owner, String titulo){
         super(owner , titulo);
@@ -47,8 +48,8 @@ public class FrmPantallaConsultasGenerales extends JDialog {
 
         this.setModal(true);
 
-        ProveedorController proveedorController = ProveedorController.getInstance();
         ProductoServicioController productoServicioController = ProductoServicioController.getInstance();
+        ProveedorController proveedorController = ProveedorController.getInstance();
         FacturaController facturaController = FacturaController.getInstance();
 
         DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -68,13 +69,22 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                 boolean dateEntered = false;
                 LocalDate fecha = LocalDate.now();
 
-                if(cuitProveedorFR.getText() != ""){
+                try{
+                    Integer.parseInt(cuitProveedorFR.getText());
                     cuitEntered = true;
                 }
-                if(LocalDate.parse(fechaFR.getText()) != null){
-                    dateEntered = true;
-                    fecha = LocalDate.parse(fechaFR.getText());
+                catch (Exception ex){
+                    cuitEntered = false;
                 }
+                try{
+                    fecha = LocalDate.parse(fechaFR.getText());
+                    dateEntered = true;
+                }
+                catch (Exception ex){
+                    dateEntered = false;
+                }
+                if(!cuitEntered && !dateEntered)
+                    return;
 
                 if(cuitEntered && dateEntered){
                     totalAImprimir = facturaController.TotalDeFacturas(fecha, Integer.parseInt(cuitProveedorFR.getText()));
@@ -106,9 +116,14 @@ public class FrmPantallaConsultasGenerales extends JDialog {
                 proveedorPrecioList = proveedorController.ConsultaDePrecios(rubro, productoServicioCDP.getText());
                 String respuesta = "";
 
-                        for(ProveedorPrecio proveedorPrecio : proveedorPrecioList){
-                            respuesta += proveedorPrecio.Print() + "   /n  ";
-                        };
+                if(!proveedorPrecioList.isEmpty()) {
+                    for (ProveedorPrecio proveedorPrecio : proveedorPrecioList) {
+                        respuesta += proveedorPrecio.Print() + "   /n  ";
+                    }
+                    ;
+                }
+                else
+                    respuesta = "El producto indicado no existe";
 
                 JOptionPane.showMessageDialog(null, respuesta);
             }
