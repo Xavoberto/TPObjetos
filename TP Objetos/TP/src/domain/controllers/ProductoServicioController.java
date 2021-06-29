@@ -7,6 +7,7 @@ import domain.entities.enumeraciones.TipoDeUnidad;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProductoServicioController {
     private List<Rubro> rubros;
@@ -30,5 +31,11 @@ public class ProductoServicioController {
     public List<Rubro> getRubros() {
         return rubros;
     }
+
+    public boolean AltaProductoServicio(Rubro rubro,String[] ps){
+       Rubro rubro2 = getRubros().stream().filter(r -> Objects.equals(r.getNombre(),rubro.getNombre())).findFirst().get();
+        return rubro.AltaProductoServicio(ps);
+    }
+
 }
 

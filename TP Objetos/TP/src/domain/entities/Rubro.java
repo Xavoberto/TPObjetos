@@ -24,7 +24,13 @@ public class Rubro {
         return this.nombre;
     }
 
-    public String toString(){
-        return this.nombre;
+
+    public boolean AltaProductoServicio(String[] PS){
+        try {
+            productoServicios.add(new ProductoServicio(PS));
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 }
