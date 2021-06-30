@@ -9,6 +9,7 @@ import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.entitiesDtos.ProveedorProductoDTO;
 import domain.entities.enumeraciones.ResponsableIva;
+import domain.entities.enumeraciones.RetencionImpuestos;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
@@ -70,6 +71,25 @@ public class Proveedor {
 
     public void AltaCertificado(CertificadoDTO Certificado){
         return;
+    }
+
+    public boolean AltaCertificado(RetencionImpuestos retencionImpuestos){
+        try {
+            certificados
+            JOptionPane.showMessageDialog(null, "El certificado para esta retencion ya existe");
+            return false;
+
+        }catch (Exception ex){
+            try {
+
+                certificados.add(new Certificado(retencionImpuestos));
+                JOptionPane.showMessageDialog(null, "Certificado Creado Correctamente");
+                return true;
+            } catch (Exception exe) {
+                JOptionPane.showMessageDialog(null, "El certificado no se pudo generar");
+                return false;
+            }
+        }
     }
 
     public void AltaCuentaCorriente(CuentaCorrienteDTO CuentaCorriente){

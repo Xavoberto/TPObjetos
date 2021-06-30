@@ -7,6 +7,7 @@ import domain.entities.entitiesDtos.CuentaCorrienteDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.enumeraciones.ResponsableIva;
+import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.enumeraciones.TipoDeUnidad;
 import domain.entities.interfaces.DocumentoRecibido;
 
@@ -154,5 +155,10 @@ public class ProveedorController {
         return proveedor1.AltaProveedorProducto(productoServicio,precioAcordado);
 
 
+    }
+
+    public boolean AltaCertificado(Proveedor proveedor, RetencionImpuestos retencionImpuestos) {
+        Proveedor proveedor1 = getProveedoresParaPantalla().stream().filter(p -> Objects.equals(p.getCuit(),proveedor.getCuit())).findFirst().get();
+        return proveedor1.AltaCertificado(retencionImpuestos);
     }
 }

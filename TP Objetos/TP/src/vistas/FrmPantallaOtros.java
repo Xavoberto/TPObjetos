@@ -7,6 +7,7 @@ import domain.controllers.RetencionController;
 import domain.entities.ProductoServicio;
 import domain.entities.Proveedor;
 import domain.entities.Rubro;
+import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.enumeraciones.TipoDeUnidad;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class FrmPantallaOtros extends JDialog{
     private JComboBox productoServicioPP;
     private JTextField precioAcordadoPP;
     private JButton botonIngresarPP;
-    private JButton ingresarButton1;
+    private JButton botonAltaCertificado;
     private JComboBox cuitProveedorAC;
     private JComboBox retencionAC;
     private JTextField nombreRubro;
@@ -78,6 +79,7 @@ public class FrmPantallaOtros extends JDialog{
 
         }
         proveedorPP.setModel(modeloProveedor);
+        cuitProveedorAC.setModel(modeloProveedor);
 
         DefaultComboBoxModel modeloProductoServ = new DefaultComboBoxModel();
 
@@ -87,6 +89,14 @@ public class FrmPantallaOtros extends JDialog{
             }
 
         productoServicioPP.setModel(modeloProductoServ);
+
+
+        DefaultComboBoxModel modeloRI = new DefaultComboBoxModel();
+
+        for(RetencionImpuestos retencionImpuestos : RetencionImpuestos.values()){
+            modeloRI.addElement(retencionImpuestos);
+        }
+        retencionAC.setModel(modeloRI);
 
         //----------------------------------Alta Producto Servicio---------------------------------------------
 
@@ -136,6 +146,15 @@ public class FrmPantallaOtros extends JDialog{
                 if (!Objects.equals(nombre, "")) {
                     productoServicioController.AltaRubro(nombre);
                 }
+
+            }
+        });
+        botonAltaCertificado.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Proveedor proveedor = (Proveedor) cuitProveedorAC.getSelectedItem();
+                RetencionImpuestos retencionImpuestos = (RetencionImpuestos) retencionAC.getSelectedItem();
+                proveedorController.AltaCertificado(proveedor, retencionImpuestos);
 
             }
         });
