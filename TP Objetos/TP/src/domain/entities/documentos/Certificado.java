@@ -10,7 +10,7 @@ public class Certificado {
 
     public Certificado(RetencionImpuestos tipoDeRetencion){
         this.tipoDeRetencion = tipoDeRetencion;
-        this.vencimiento = LocalDate.now().minusMonths(1);
+        this.vencimiento = LocalDate.now().plusMonths(1);
     }
 
     public LocalDate getVencimiento() {
@@ -20,4 +20,5 @@ public class Certificado {
     public RetencionImpuestos getTipoDeRetencion() {
         return tipoDeRetencion;
     }
+
 }

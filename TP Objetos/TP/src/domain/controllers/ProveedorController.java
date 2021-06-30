@@ -157,8 +157,8 @@ public class ProveedorController {
 
     }
 
-    public boolean AltaCertificado(Proveedor proveedor, RetencionImpuestos retencionImpuestos) {
+    public void AltaCertificado(Proveedor proveedor, RetencionImpuestos retencionImpuestos) {
         Proveedor proveedor1 = getProveedoresParaPantalla().stream().filter(p -> Objects.equals(p.getCuit(),proveedor.getCuit())).findFirst().get();
-        return proveedor1.AltaCertificado(retencionImpuestos);
+        proveedor1.AltaCertificado(retencionImpuestos);
     }
 }

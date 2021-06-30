@@ -37,6 +37,7 @@ public class Retencion {
         double retencionAPagar = 0;
         double iva = 0;
 
+        proveedor.ValidarCertificados();
         List<Certificado> certificados = proveedor.getCertificados();
         double ivaPagado = documentoRecibidos.stream().filter(d -> d.esFactura()).mapToDouble(factura -> ((Factura)factura).getIvaTotal()).sum();
 

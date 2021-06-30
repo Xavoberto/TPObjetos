@@ -12,6 +12,7 @@ import domain.entities.enumeraciones.ResponsableIva;
 import domain.entities.enumeraciones.RetencionImpuestos;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
@@ -73,23 +74,26 @@ public class Proveedor {
         return;
     }
 
-    public boolean AltaCertificado(RetencionImpuestos retencionImpuestos){
-        try {
-            certificados
-            JOptionPane.showMessageDialog(null, "El certificado para esta retencion ya existe");
-            return false;
+    public void AltaCertificado(RetencionImpuestos retencionImpuestos){
 
-        }catch (Exception ex){
-            try {
-
-                certificados.add(new Certificado(retencionImpuestos));
-                JOptionPane.showMessageDialog(null, "Certificado Creado Correctamente");
-                return true;
-            } catch (Exception exe) {
-                JOptionPane.showMessageDialog(null, "El certificado no se pudo generar");
-                return false;
-            }
+        ValidarCertificados();
+        if (certificados.stream().anyMatch(c -> c.getTipoDeRetencion().equals(retencionImpuestos))){
+            JOptionPane.showMessageDialog(null, "El certificado no se puede crear porque ya existe uno valido");
+            return;
         }
+        certificados.add(new Certificado(retencionImpuestos));
+        JOptionPane.showMessageDialog(null, "Certificado Creado Correctamente");
+
+    }
+
+    public void ValidarCertificados(){
+        certificados.stream().filter(c -> c.getVencimiento().isBefore(LocalDate.now()));
+
+        for (Certificado certificado: certificados) {
+            certificados.remove(certificado);
+        }
+
+
     }
 
     public void AltaCuentaCorriente(CuentaCorrienteDTO CuentaCorriente){
@@ -142,9 +146,6 @@ public class Proveedor {
         return certificados;
     }
 
-    public void CertificadoVencido(Certificado certificado) {
-        certificados.remove(certificado);
-    }
 
     public String getCorreoElectronico() {
         return correoElectronico;

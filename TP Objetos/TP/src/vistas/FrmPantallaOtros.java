@@ -103,7 +103,7 @@ public class FrmPantallaOtros extends JDialog{
         botonIngresarPS.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               String[] PS = cargarPS.getText().replaceAll("\s+","").split("\\,");
+               String[] PS = cargarPS.getText().replaceAll("\\s+","").split("\\,");
                 Rubro rubro = (Rubro)rubroAPS.getSelectedItem();
                 TipoDeUnidad tipoDeUnidad = (TipoDeUnidad)tipoDeUnidadAPS.getSelectedItem();
 
@@ -149,6 +149,8 @@ public class FrmPantallaOtros extends JDialog{
 
             }
         });
+
+        //----------------------------------------Alta Certificado-----------------------------------------------
         botonAltaCertificado.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
