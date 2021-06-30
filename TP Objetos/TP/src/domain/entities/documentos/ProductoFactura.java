@@ -24,6 +24,13 @@ public class ProductoFactura {
         iva = productoServicio.getIva();
     }
 
+    public ProductoFactura(String[] productoFactura) {
+        nombre = productoFactura[0];
+        precio = Double.parseDouble(productoFactura[1]);
+        descripcion = productoFactura[2];
+        iva = new Iva(Double.parseDouble(productoFactura[3]));
+    }
+
     public double getPrecio() {
         return precio;
     }

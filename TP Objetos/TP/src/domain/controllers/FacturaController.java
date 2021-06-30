@@ -2,12 +2,14 @@ package domain.controllers;
 
 import domain.entities.ProductoServicio;
 import domain.entities.Proveedor;
+import domain.entities.ProveedorProducto;
 import domain.entities.documentos.Factura;
 import domain.entities.documentos.OrdenDeCompra;
 import domain.entities.documentos.ProductoFactura;
 import domain.entities.documentos.dtos.FacturaDTO;
 import domain.entities.entitiesDtos.ProveedorDTO;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class FacturaController {
         Proveedor proveedor = new Proveedor(proveedorController.getProveedor(123));
 
         productosFacturas.add(new ProductoFactura(new ProductoServicio(proveedor.getProducto("test").getProductoServicio())));
-        facturas.add(new Factura(proveedor, new OrdenDeCompra(), LocalDate.now(), productosFacturas));
+        facturas.add(new Factura(proveedor, null, LocalDate.now(), productosFacturas));
     }
 
     public static FacturaController getInstance(){
@@ -35,14 +37,23 @@ public class FacturaController {
         return instancia;
     }
 
-
     public void AltaFactura(FacturaDTO factura){
             facturas.add(new Factura(factura));
     }
 
+    public void AltaFactura(Proveedor proveedor, String[] ordenDeCompra, String[] itemCompra, String[] productoFactura, ProveedorProducto proveedorProducto) {
+        try{
+            facturas.add(new Factura(proveedor,ordenDeCompra,itemCompra,productoFactura, proveedorProducto));
+            JOptionPane.showMessageDialog(null,"Factura Creada");
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"Error, revise los datos e intente de nuevo");
+        }
+    }
+
     public Double TotalDeFacturas(LocalDate fecha, int cuitProveedor){
         ProveedorController proveedorController = ProveedorController.getInstance();
-        Optional<Proveedor> optionalProveedor = proveedorController.buscarProveedor(cuitProveedor);
+        Optional<Proveedor> optionalProveedor = proveedorController.BuscarProveedor(cuitProveedor);
 
         return optionalProveedor.get().getCuentaCorriente().TotalDeFacturas(fecha);
     }
@@ -53,7 +64,7 @@ public class FacturaController {
 
     public Double TotalDeFacturas(int cuitProveedor){
         ProveedorController proveedorController = ProveedorController.getInstance();
-        Optional<Proveedor> optionalProveedor = proveedorController.buscarProveedor(cuitProveedor);
+        Optional<Proveedor> optionalProveedor = proveedorController.BuscarProveedor(cuitProveedor);
 
         if (!optionalProveedor.isPresent())
             return null;
@@ -76,6 +87,5 @@ public class FacturaController {
                 return new FacturaDTO(factura);
         }
         return null;
-
     }
 }

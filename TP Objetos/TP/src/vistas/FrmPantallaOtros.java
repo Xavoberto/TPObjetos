@@ -6,6 +6,7 @@ import domain.controllers.ProveedorController;
 import domain.controllers.RetencionController;
 import domain.entities.ProductoServicio;
 import domain.entities.Proveedor;
+import domain.entities.ProveedorProducto;
 import domain.entities.Rubro;
 import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.enumeraciones.TipoDeUnidad;
@@ -15,15 +16,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.TileObserver;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FrmPantallaOtros extends JDialog{
 
     private JPanel panelPrincipal;
-    private JTextField textField1;
-    private JButton ingresarButton5;
-    private JTextField textField2;
-    private JButton ingresarButton4;
+    private JTextField proveedorField;
+    private JButton proveedorButton;
+    private JTextField facturaField;
+    private JButton facturaButton;
     private JTextField cargarPS;
     private JButton botonIngresarPS;
     private JComboBox proveedorPP;
@@ -37,6 +39,9 @@ public class FrmPantallaOtros extends JDialog{
     private JButton ingresarButton;
     private JComboBox rubroAPS;
     private JComboBox tipoDeUnidadAPS;
+    private JComboBox FProveedorBox;
+    private JComboBox ProveedorProBox;
+    private JButton buscarButton;
 
     public FrmPantallaOtros(Window owner, String titulo){
         super(owner , titulo);
@@ -80,6 +85,7 @@ public class FrmPantallaOtros extends JDialog{
         }
         proveedorPP.setModel(modeloProveedor);
         cuitProveedorAC.setModel(modeloProveedor);
+        FProveedorBox.setModel(modeloProveedor);
 
         DefaultComboBoxModel modeloProductoServ = new DefaultComboBoxModel();
 
@@ -98,6 +104,9 @@ public class FrmPantallaOtros extends JDialog{
         }
         retencionAC.setModel(modeloRI);
 
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+
         //----------------------------------Alta Producto Servicio---------------------------------------------
 
         botonIngresarPS.addMouseListener(new MouseAdapter() {
@@ -107,14 +116,12 @@ public class FrmPantallaOtros extends JDialog{
                 Rubro rubro = (Rubro)rubroAPS.getSelectedItem();
                 TipoDeUnidad tipoDeUnidad = (TipoDeUnidad)tipoDeUnidadAPS.getSelectedItem();
 
-
                productoServicioController.AltaProductoServicio(rubro,tipoDeUnidad,PS);
 
             }
         });
 
         //-----------------------------------Alta Proveedor Producto--------------------------------------------
-
         botonIngresarPP.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -126,7 +133,6 @@ public class FrmPantallaOtros extends JDialog{
                     JOptionPane.showMessageDialog(null,"Ingrese datos validos");
                     return;
                 }
-
 
                 Proveedor proveedor = (Proveedor)proveedorPP.getSelectedItem();
                 ProductoServicio productoServicio = (ProductoServicio)productoServicioPP.getSelectedItem();
@@ -140,8 +146,6 @@ public class FrmPantallaOtros extends JDialog{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
-
                 String nombre = nombreRubro.getText();
                 if (!Objects.equals(nombre, "")) {
                     productoServicioController.AltaRubro(nombre);
@@ -158,6 +162,66 @@ public class FrmPantallaOtros extends JDialog{
                 RetencionImpuestos retencionImpuestos = (RetencionImpuestos) retencionAC.getSelectedItem();
                 proveedorController.AltaCertificado(proveedor, retencionImpuestos);
 
+            }
+        });
+
+        //----------------------------------------Alta Proveedor---------------------------------------------------
+        proveedorButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(Objects.equals(proveedorField.getText(), "")){
+                    return;
+                }
+
+                String[] PS = proveedorField.getText().replaceAll("\\s+","").split("\\,");
+                try{
+                    String[] direccion = PS[3].replaceAll("\\(","").replaceAll("\\)","").split("\\-");
+
+                    proveedorController.AltaProveedor(PS,direccion);
+                }
+                catch (Exception ex){
+                    JOptionPane.showMessageDialog(null,"Error, ingrese la direccion correctamente, dentro de parentesis y separando los datos con '-'.");
+                }
+            }
+        });
+
+        //----------------------------------------Alta Factura---------------------------------------------------
+        buscarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                for(ProveedorProducto proveedorProducto : ((Proveedor) FProveedorBox.getSelectedItem()).getProveedorProductos()){
+                    model.addElement(proveedorProducto);
+                }
+                ProveedorProBox.setModel(model);
+            }
+        });
+
+        facturaButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(Objects.equals(facturaField.getText(), "")){
+                    return;
+                }
+
+                Proveedor proveedor = (Proveedor) FProveedorBox.getSelectedItem();
+                try {
+                    ProveedorProducto proveedorProducto = (ProveedorProducto) ProveedorProBox.getSelectedItem();
+
+                    String[] PS = facturaField.getText().replaceAll("\\s+", "").split("\\,");
+
+                    String[] ordenDeCompra = PS[0].replaceAll("\\(", "").replaceAll("\\)", "").split("\\-");
+                    String[] itemCompra = ordenDeCompra[1].replaceAll("\\[", "").replaceAll("\\]", "").split("\\;");
+
+                    ordenDeCompra[1] = ordenDeCompra[2];
+
+                    String[] productoFactura = PS[1].replaceAll("\\(", "").replaceAll("\\)", "").split("\\-");
+
+                    facturaController.AltaFactura(proveedor, ordenDeCompra, itemCompra, productoFactura, proveedorProducto);
+                }
+                catch (Exception ex){
+                    JOptionPane.showMessageDialog(null,"Elija un proveedor y vuelva a intentarlo");
+                    return;
+                }
             }
         });
     }

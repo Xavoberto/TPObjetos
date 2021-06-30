@@ -1,6 +1,7 @@
 package domain.entities;
 
 import domain.entities.documentos.Certificado;
+import domain.entities.documentos.Factura;
 import domain.entities.documentos.OrdenDePago;
 import domain.entities.documentos.dtos.CertificadoDTO;
 import domain.entities.documentos.NotaRecibida;
@@ -14,10 +15,7 @@ import domain.entities.enumeraciones.RetencionImpuestos;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class Proveedor {
     private int cuit;
@@ -51,12 +49,12 @@ public class Proveedor {
     }
 
     public Proveedor(int cuit, ResponsableIva responsableIva, String nombreFantasia, Direccion direccion, String telefono, String correoElectronico, double numeroIngresosBrutos,
-                        LocalDateTime inicioActividades, List<Rubro> rubros, List<Certificado> certificados, CuentaCorriente cuentaCorriente,
+                        LocalDateTime inicioActividades, List<Rubro> rubros, List<Certificado> certificados,
                         List<ProveedorProducto> proveedorProductos, List<NotaRecibida> notaRecibidas){
 
         this.certificados = certificados;
         this.correoElectronico = correoElectronico;
-        this.cuentaCorriente = cuentaCorriente;
+        cuentaCorriente = new CuentaCorriente(this,0,new ArrayList<NotaRecibida>(),new ArrayList<Factura>(),new ArrayList<OrdenDePago>());
         this.inicioActividades = inicioActividades;
         this.cuit = cuit;
         this.direccion = direccion;
@@ -69,14 +67,29 @@ public class Proveedor {
         this.responsableIva = responsableIva;
     }
 
+    public Proveedor(String[] datos, String[] direccion) {
+        cuit = Integer.parseInt(datos[0]);
+        responsableIva = Objects.equals(datos[1].toUpperCase(), "MONOTRIBUTO") ? ResponsableIva.MONOTRIBUTO : ResponsableIva.RESPONSABLEINSCRIPTO;
+        nombreFantasia = datos[2];
+        this.direccion = new Direccion(direccion[0],direccion[1],direccion[2],direccion[3],direccion[4],direccion[5]);
+        telefono = datos[4];
+        correoElectronico = datos[5];
+        numeroIngresosBrutos = Double.parseDouble(datos[6]);
+        inicioActividades = LocalDateTime.now();
+        rubros = new ArrayList<Rubro>();
+        certificados = new ArrayList<Certificado>();
+        cuentaCorriente = new CuentaCorriente(this,0,new ArrayList<NotaRecibida>(),new ArrayList<Factura>(),new ArrayList<OrdenDePago>());
+        proveedorProductos = new ArrayList<ProveedorProducto>();
+        notaRecibidas = new ArrayList<NotaRecibida>();
+    }
 
     public void AltaCertificado(CertificadoDTO Certificado){
         return;
     }
 
     public void AltaCertificado(RetencionImpuestos retencionImpuestos){
-
         ValidarCertificados();
+
         if (certificados.stream().anyMatch(c -> c.getTipoDeRetencion().equals(retencionImpuestos))){
             JOptionPane.showMessageDialog(null, "El certificado no se puede crear porque ya existe uno valido");
             return;
@@ -87,13 +100,13 @@ public class Proveedor {
     }
 
     public void ValidarCertificados(){
-        certificados.stream().filter(c -> c.getVencimiento().isBefore(LocalDate.now()));
+        List<Certificado> certificadosList = certificados.stream().filter(c -> c.getVencimiento().isBefore(LocalDate.now())).toList();
 
-        for (Certificado certificado: certificados) {
-            certificados.remove(certificado);
+        if(!certificadosList.isEmpty()) {
+            for (Certificado certificado : certificadosList) {
+                certificados.remove(certificado);
+            }
         }
-
-
     }
 
     public void AltaCuentaCorriente(CuentaCorrienteDTO CuentaCorriente){

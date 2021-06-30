@@ -8,6 +8,7 @@ import domain.entities.entitiesDtos.ProveedorDTO;
 import domain.entities.enumeraciones.ResponsableIva;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class test {
@@ -15,8 +16,10 @@ public class test {
 
         ProveedorController proveedorController = ProveedorController.getInstance();
 
-        proveedorController.AltaProveedor(new ProveedorDTO(123, ResponsableIva.MONOTRIBUTO, "asd", new Direccion(),"2312313", "p",
-        12312.32,LocalDateTime.now(), null, null, null, null, null));
+        proveedorController.AltaProveedor(new ProveedorDTO(123, ResponsableIva.MONOTRIBUTO, "asd",
+                new Direccion("String calle", 2345, "String localidad", 23, "String provincia", "String pais"),
+                "2312313", "p", 12312.32,LocalDateTime.now(), new ArrayList<Rubro>(), new ArrayList<Certificado>(), null,
+                new ArrayList<ProveedorProducto>(),new ArrayList<NotaRecibida>()));
 
 
         List<OrdenDePago> ordenDePagoList = null;

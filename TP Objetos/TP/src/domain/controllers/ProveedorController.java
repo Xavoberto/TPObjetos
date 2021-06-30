@@ -11,6 +11,7 @@ import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.enumeraciones.TipoDeUnidad;
 import domain.entities.interfaces.DocumentoRecibido;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,13 +38,12 @@ public class ProveedorController {
         List<Rubro> rubros = new ArrayList<Rubro>();
         rubros.add(productoServicioController.getRubros().get(0));
         List<Factura> facturasProveedor = new ArrayList<Factura>();
-        facturasProveedor.add(new Factura(null,new OrdenDeCompra(),LocalDate.now(),productoFacturas));
+        facturasProveedor.add(new Factura(null,null,LocalDate.now(),productoFacturas));
 
         ordenDePagoList.add(new OrdenDePago(0, FormaDePago.EFECTIVO, null ,  documentoRecibidos ));
         proveedores.add(new Proveedor(
-            123, ResponsableIva.MONOTRIBUTO, "Proveedor de Prueba", new Direccion(), "63746397",".com",1238721,
-            LocalDateTime.now(),rubros , new ArrayList<Certificado>(), new CuentaCorriente(null,0,new ArrayList<NotaRecibida>(),
-                facturasProveedor,new ArrayList<OrdenDePago>()), proveedorProductos, new ArrayList<NotaRecibida>()));
+            123, ResponsableIva.MONOTRIBUTO, "Proveedor de Prueba", null, "63746397",".com",1238721,
+            LocalDateTime.now(),rubros , new ArrayList<Certificado>(), proveedorProductos, new ArrayList<NotaRecibida>()));
 
         proveedores.get(0).setProveedorCuentaCorriente();
         documentoRecibidos.add(new Factura(proveedores.get(0), null, LocalDate.now(), productoFacturas ));
@@ -61,10 +61,25 @@ public class ProveedorController {
         proveedores.add(new Proveedor(proveedor));
     }
 
+    public void AltaProveedor(String[] datos, String[] direccion) {
+        try{
+            if(BuscarProveedor(Integer.parseInt(datos[0])) == null){
+                proveedores.add(new Proveedor(datos, direccion));
+                JOptionPane.showMessageDialog(null, "Proveedor Creado");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Proveedor ya existe");
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"Error, revise los datos e intente nuevamente");
+        }
+
+    }
+
     public CuentaCorrienteDTO ConsultaCuentaCorriente(int cuitProveedor){
         CuentaCorrienteDTO cuentaCorrienteDTO;
 
-        Optional<Proveedor> proveedorOptional = buscarProveedor(cuitProveedor);
+        Optional<Proveedor> proveedorOptional = BuscarProveedor(cuitProveedor);
             if (proveedorOptional.isPresent())
                 return new CuentaCorrienteDTO(proveedorOptional.get().getCuentaCorriente());
 
@@ -122,7 +137,7 @@ public class ProveedorController {
         return null;
     }
 
-    public Optional<Proveedor> buscarProveedor(int cuit){
+    public Optional<Proveedor> BuscarProveedor(int cuit){
         Optional<Proveedor> proveedorOptional = this.proveedores.stream().filter(p -> p.getCuit() == cuit).findFirst();
 
         if (!proveedorOptional.isPresent())

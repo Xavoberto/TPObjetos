@@ -1,10 +1,12 @@
 package domain.entities.documentos;
 
 import domain.entities.Proveedor;
+import domain.entities.ProveedorProducto;
 import domain.entities.documentos.dtos.FacturaDTO;
 import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Factura implements DocumentoRecibido {
@@ -18,7 +20,6 @@ public class Factura implements DocumentoRecibido {
         ordenDeCompra = factura.getOrdenDeCompra();
         fecha = factura.getFecha();
         productos = factura.getProductos();
-
     }
 
     public Factura(Proveedor proveedor, OrdenDeCompra ordenDeCompra, LocalDate fecha, List<ProductoFactura> productoFacturas){
@@ -26,6 +27,15 @@ public class Factura implements DocumentoRecibido {
         this.ordenDeCompra = ordenDeCompra;
         this.productos = productoFacturas;
         this.proveedor = proveedor;
+    }
+
+    public Factura(Proveedor proveedor, String[] ordenDeCompra, String[] itemCompra, String[] productoFactura, ProveedorProducto proveedorProducto) {
+        this.proveedor = proveedor;
+        this.ordenDeCompra = new OrdenDeCompra(ordenDeCompra,itemCompra,proveedorProducto);
+        this.fecha = LocalDate.now();
+        this.productos = new ArrayList<ProductoFactura>();
+
+        productos.add(new ProductoFactura(productoFactura));
     }
 
 
