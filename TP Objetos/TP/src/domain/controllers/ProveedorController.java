@@ -34,7 +34,8 @@ public class ProveedorController {
         List<ProductoFactura> productoFacturas = new ArrayList<ProductoFactura>();
         productoFacturas.add(new ProductoFactura( "productofac1", 2, "prod1",new Iva(5)));
         List<ProveedorProducto> proveedorProductos = new ArrayList<ProveedorProducto>();
-        proveedorProductos.add(new ProveedorProducto(null, new ProductoServicio("test", TipoDeUnidad.UNIDAD,21,"",new Iva(5)),21));
+        proveedorProductos.add(new ProveedorProducto(null, new ProductoServicio("test", TipoDeUnidad.UNIDAD,21,"",new Iva(5),
+                productoServicioController.getRubros().get(0)),21));
         List<Rubro> rubros = new ArrayList<Rubro>();
         rubros.add(productoServicioController.getRubros().get(0));
         List<Factura> facturasProveedor = new ArrayList<Factura>();
@@ -165,11 +166,13 @@ public class ProveedorController {
 
 
     public boolean AltaProveedorProducto(Proveedor proveedor, ProductoServicio productoServicio, Double precioAcordado) {
-
         Proveedor proveedor1 = getProveedoresParaPantalla().stream().filter(p -> Objects.equals(p.getCuit(),proveedor.getCuit())).findFirst().get();
+
+        if(!proveedor1.getRubros().stream().anyMatch(r -> Objects.equals(r.getNombre(), productoServicio.getRubro().getNombre()))) {
+            proveedor1.AgregarRubro(productoServicio.getRubro());
+            JOptionPane.showMessageDialog(null,"Rubro agregado al proveedor.");
+        }
         return proveedor1.AltaProveedorProducto(productoServicio,precioAcordado);
-
-
     }
 
     public void AltaCertificado(Proveedor proveedor, RetencionImpuestos retencionImpuestos) {
@@ -194,6 +197,5 @@ public class ProveedorController {
         catch (Exception ex){
             JOptionPane.showMessageDialog(null,"Error, agregar documentos a pagar");
         }
-
     }
 }

@@ -18,7 +18,7 @@ public class ProductoServicioController {
         rubros = new ArrayList<Rubro>();
         List<ProductoServicio> productoServicios = new ArrayList<ProductoServicio>();
         productoServicios.add(new ProductoServicio("producto1", TipoDeUnidad.UNIDAD, 2.5,
-                "primero", new Iva(5)));
+                "primero", new Iva(5),new Rubro("rubro")));
         rubros.add(new Rubro("rubro1",productoServicios));
     }
 
@@ -37,7 +37,7 @@ public class ProductoServicioController {
 
     public boolean AltaProductoServicio(Rubro rubro,TipoDeUnidad tipoDeUnidad,String[] ps){
        Rubro rubro2 = getRubros().stream().filter(r -> Objects.equals(r.getNombre(),rubro.getNombre())).findFirst().get();
-        return rubro2.AltaProductoServicio(tipoDeUnidad, ps);
+        return rubro2.AltaProductoServicio(tipoDeUnidad, ps, rubro);
     }
 
     public boolean AltaRubro(String nombre){

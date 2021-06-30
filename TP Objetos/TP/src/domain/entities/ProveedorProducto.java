@@ -18,9 +18,13 @@ public class ProveedorProducto {
     }
 
     public ProductoServicioDTO getProductoServicio(){
-         return new ProductoServicioDTO(producto.getNombre(),producto.getTipoDeUnidad(),producto.getPrecio(),producto.getDescripcion(),producto.getIva());
+         return new ProductoServicioDTO(producto.getNombre(),producto.getTipoDeUnidad(),producto.getPrecio(),producto.getDescripcion(),producto.getIva(),producto.getRubro());
     }
 
     public String ToString() {return producto.getNombre();
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 }

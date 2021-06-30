@@ -123,7 +123,14 @@ public class Proveedor {
 
     public boolean AltaProveedorProducto(ProductoServicio productoServicio, double precio){
         try{
-            proveedorProductos.add(new ProveedorProducto(productoServicio,precio));
+            ProveedorProducto proveedorProducto = new ProveedorProducto(productoServicio,precio);
+            if(proveedorProductos.stream().anyMatch(p -> Objects.equals(p.getProductoServicio().getNombre(),proveedorProducto.getProductoServicio().getNombre()))) {
+                proveedorProductos.stream().filter(p -> Objects.equals(p.getProductoServicio().getNombre(), proveedorProducto.getProductoServicio().getNombre())).findFirst()
+                        .get().setPrecio(precio);
+                JOptionPane.showMessageDialog(null,"Precio actualizado.");
+                return true;
+            }
+            proveedorProductos.add(proveedorProducto);
             JOptionPane.showMessageDialog(null,"Proveedor Producto Creado");
             return true;
 
@@ -206,5 +213,9 @@ public class Proveedor {
 
     public String toString(){
         return "" + cuit;
+    }
+
+    public void AgregarRubro(Rubro rubro) {
+        rubros.add(rubro);
     }
 }

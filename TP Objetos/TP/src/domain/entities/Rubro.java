@@ -28,9 +28,9 @@ public class Rubro {
     }
 
 
-    public boolean AltaProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS){
+    public boolean AltaProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS, Rubro rubro){
         try {
-            productoServicios.add(new ProductoServicio(tipoDeUnidad, PS));
+            productoServicios.add(new ProductoServicio(tipoDeUnidad, PS,rubro));
             JOptionPane.showMessageDialog(null,"producto creado");
             return true;
 

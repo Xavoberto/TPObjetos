@@ -10,14 +10,15 @@ public class ProductoServicio {
     private double precio;
     private String descripcion;
     private Iva iva;
+    private Rubro rubro;
 
-
-    public ProductoServicio(String nombre, TipoDeUnidad tipoDeUnidad, double precio, String descripcion, Iva iva){
+    public ProductoServicio(String nombre, TipoDeUnidad tipoDeUnidad, double precio, String descripcion, Iva iva, Rubro rubro){
         this.nombre = nombre;
         this.tipoDeUnidad = tipoDeUnidad;
         this.precio = precio;
         this.descripcion = descripcion;
         this.iva = iva;
+        this.rubro = rubro;
     }
 
     public ProductoServicio(ProductoServicioDTO productoServicioDTO){
@@ -26,15 +27,18 @@ public class ProductoServicio {
         this.precio = productoServicioDTO.getPrecio();
         this.descripcion = productoServicioDTO.getDescripcion();
         this.iva = iva;
+        this.rubro = productoServicioDTO.getRubro();
     }
 
-    public ProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS){
+    public ProductoServicio(TipoDeUnidad tipoDeUnidad,String[] PS, Rubro rubro){
         this.nombre = PS[0];
         this.tipoDeUnidad = tipoDeUnidad;
         this.precio = Double.parseDouble(PS[1]);
         this.descripcion = PS[2];
         this.iva = new Iva(Double.parseDouble(PS[3]));
+        this.rubro = rubro;
     }
+
 
     public double getPrecio() {
         return precio;
@@ -58,5 +62,9 @@ public class ProductoServicio {
 
     public String toString(){
         return nombre;
+    }
+
+    public Rubro getRubro() {
+        return rubro;
     }
 }
