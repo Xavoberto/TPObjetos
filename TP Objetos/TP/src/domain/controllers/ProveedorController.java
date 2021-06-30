@@ -176,4 +176,24 @@ public class ProveedorController {
         Proveedor proveedor1 = getProveedoresParaPantalla().stream().filter(p -> Objects.equals(p.getCuit(),proveedor.getCuit())).findFirst().get();
         proveedor1.AltaCertificado(retencionImpuestos);
     }
+
+    public void RealizarPago(Proveedor selectedItem, List<DocumentoRecibido> documentos, FormaDePago formaDePago) {
+        try{
+            List<DocumentoRecibido> documentoRecibidos = new ArrayList<DocumentoRecibido>();
+
+            for(DocumentoRecibido documentoRecibido : documentos){
+                if(documentoRecibido.esFactura())
+                    documentoRecibidos.add((Factura) documentoRecibido);
+                else
+                    documentoRecibidos.add((NotaRecibida) documentoRecibido);
+            }
+
+            selectedItem.getCuentaCorriente().RealizarPago(formaDePago,documentoRecibidos);
+            JOptionPane.showMessageDialog(null,"Pago realizado");
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"Error, agregar documentos a pagar");
+        }
+
+    }
 }

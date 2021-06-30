@@ -8,15 +8,20 @@ import domain.entities.ProductoServicio;
 import domain.entities.Proveedor;
 import domain.entities.ProveedorProducto;
 import domain.entities.Rubro;
+import domain.entities.documentos.Factura;
+import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.enumeraciones.TipoDeUnidad;
+import domain.entities.interfaces.DocumentoRecibido;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.TileObserver;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FrmPantallaOtros extends JDialog{
@@ -42,6 +47,13 @@ public class FrmPantallaOtros extends JDialog{
     private JComboBox FProveedorBox;
     private JComboBox ProveedorProBox;
     private JButton buscarButton;
+    private JComboBox ProveedorPBox;
+    private JButton proveedorPagobutton;
+    private JComboBox pagoListBox;
+    private JButton agregarButton;
+    private JButton pagoButton;
+    private JTextField textField1;
+    private JComboBox PagoBox;
 
     public FrmPantallaOtros(Window owner, String titulo){
         super(owner , titulo);
@@ -86,6 +98,7 @@ public class FrmPantallaOtros extends JDialog{
         proveedorPP.setModel(modeloProveedor);
         cuitProveedorAC.setModel(modeloProveedor);
         FProveedorBox.setModel(modeloProveedor);
+        ProveedorPBox.setModel(modeloProveedor);
 
         DefaultComboBoxModel modeloProductoServ = new DefaultComboBoxModel();
 
@@ -105,6 +118,17 @@ public class FrmPantallaOtros extends JDialog{
         retencionAC.setModel(modeloRI);
 
         DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+        DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+
+        for(FormaDePago formaDePago : FormaDePago.values()){
+            model1.addElement(formaDePago);
+        }
+        PagoBox.setModel(model1);
+
+        List<DocumentoRecibido> documentoRecibidos = new ArrayList<DocumentoRecibido>();
+
+        DefaultComboBoxModel modelPago = new DefaultComboBoxModel();
 
 
         //----------------------------------Alta Producto Servicio---------------------------------------------
@@ -222,6 +246,38 @@ public class FrmPantallaOtros extends JDialog{
                     JOptionPane.showMessageDialog(null,"Elija un proveedor y vuelva a intentarlo");
                     return;
                 }
+            }
+        });
+
+        //----------------------------------------Realizar Pago---------------------------------------------------
+        proveedorPagobutton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                DefaultComboBoxModel modelPago = new DefaultComboBoxModel();
+
+                for(Factura documentoRecibido : ((Proveedor) ProveedorPBox.getSelectedItem()).getCuentaCorriente().getDocumentoImpago()){
+                    modelPago.addElement(documentoRecibido);
+                }
+                pagoListBox.setModel(modelPago);
+            }
+        });
+
+        agregarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                documentoRecibidos.add((Factura) pagoListBox.getSelectedItem());
+                JOptionPane.showMessageDialog(null,"Documento Agregado");
+            }
+        });
+
+        pagoButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                FormaDePago formaDePago = (FormaDePago) PagoBox.getSelectedItem();
+
+                proveedorController.RealizarPago(((Proveedor) ProveedorPBox.getSelectedItem()),documentoRecibidos,formaDePago);
+
+                documentoRecibidos.clear();
             }
         });
     }

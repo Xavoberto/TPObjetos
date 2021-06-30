@@ -59,6 +59,10 @@ public class CuentaCorriente {
         double montoAPagar = documentosAPagar.stream().mapToDouble(d -> d.getMonto()).sum();
         Retencion retencion = retencionController.AltaRetencion(proveedor, montoAPagar, documentosAPagar);
         pagosRealizados.add(new OrdenDePago(montoAPagar,formaDePago,retencion,documentosAPagar));
+
+        for(DocumentoRecibido documentoRecibido : documentosAPagar){
+            documentosImpagos.remove((Factura) documentoRecibido);
+        }
     }
 
     public Proveedor getProveedor() {
@@ -85,5 +89,7 @@ public class CuentaCorriente {
         this.proveedor = proveedor;
     }
 
-
+    public void AgregarFactura(Factura factura){
+        documentosImpagos.add(factura);
+    }
 }

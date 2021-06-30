@@ -17,7 +17,12 @@ public class NotaRecibida implements DocumentoRecibido {
     public boolean esFactura(){
         return false;
     }
+
     public TipoNota getNotaDe(){
         return notaDe;
+    }
+
+    public String ToString(){
+        return notaDe.toString();
     }
 }

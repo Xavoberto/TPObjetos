@@ -43,7 +43,9 @@ public class FacturaController {
 
     public void AltaFactura(Proveedor proveedor, String[] ordenDeCompra, String[] itemCompra, String[] productoFactura, ProveedorProducto proveedorProducto) {
         try{
-            facturas.add(new Factura(proveedor,ordenDeCompra,itemCompra,productoFactura, proveedorProducto));
+            Factura factura = new Factura(proveedor,ordenDeCompra,itemCompra,productoFactura, proveedorProducto);
+            facturas.add(factura);
+            proveedor.getCuentaCorriente().AgregarFactura(factura);
             JOptionPane.showMessageDialog(null,"Factura Creada");
         }
         catch (Exception ex){

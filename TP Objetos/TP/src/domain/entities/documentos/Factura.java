@@ -65,4 +65,8 @@ public class Factura implements DocumentoRecibido {
 
     public List<ProductoFactura> getProductos() {return productos;
     }
+
+    public String ToString(){
+        return fecha.toString();
+    }
 }
