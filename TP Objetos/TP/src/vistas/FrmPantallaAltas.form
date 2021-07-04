@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="vistas.FrmPantallaAltas">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="etched" title="Pantalla De Altas" title-justification="2" title-position="3">
+      <font name="Source Code Pro" size="18" style="1"/>
+      <color color="-11249574"/>
+    </border>
+    <children>
+      <component id="52f81" class="javax.swing.JButton" binding="altaProveedorButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta Proveedor"/>
+        </properties>
+      </component>
+      <component id="dc6f1" class="javax.swing.JButton" binding="altaFacturaButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta Factura"/>
+        </properties>
+      </component>
+      <component id="3a2d8" class="javax.swing.JButton" binding="altaProveedorProductoButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta Proveedor Producto"/>
+        </properties>
+      </component>
+      <component id="15968" class="javax.swing.JButton" binding="altaCertificadoButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta certificado"/>
+        </properties>
+      </component>
+      <component id="7cd17" class="javax.swing.JButton" binding="altaRubroButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta Rubro"/>
+        </properties>
+      </component>
+      <component id="75b82" class="javax.swing.JButton" binding="realizarPagoButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Realizar Pago "/>
+        </properties>
+      </component>
+      <component id="c4b8" class="javax.swing.JButton" binding="altaProductoServicioButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Alta Producto Servicio"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
