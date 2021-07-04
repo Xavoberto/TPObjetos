@@ -198,4 +198,6 @@ public class ProveedorController {
             JOptionPane.showMessageDialog(null,"Error, agregar documentos a pagar");
         }
     }
+
+
 }

@@ -53,6 +53,7 @@ public class FacturaController {
         }
     }
 
+
     public Double TotalDeFacturas(LocalDate fecha, int cuitProveedor){
         ProveedorController proveedorController = ProveedorController.getInstance();
         Optional<Proveedor> optionalProveedor = proveedorController.BuscarProveedor(cuitProveedor);
