@@ -1,6 +1,6 @@
 package domain.entities.enumeraciones;
 
 public enum ResponsableIva {
-    RESPONSABLEINSCRIPTO,
+    RESPONSABLE_INSCRIPTO,
     MONOTRIBUTO
 }

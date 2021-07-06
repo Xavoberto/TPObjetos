@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class FrmAltaProductoServicio extends JDialog{
     private JPanel panelPrincipal;
@@ -54,6 +55,10 @@ public class FrmAltaProductoServicio extends JDialog{
         buttonAltaProductoServicio.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(Objects.equals(nombreField.getText(), "") || Objects.equals(descripcionField.getText(),"")){
+                    JOptionPane.showMessageDialog(null,"Error, ingrese datos en nombre y en descripcion");
+                    return;
+                }
                 String nombre = nombreField.getText();
                 double precio = Double.parseDouble(precioField.getText());
                 String descripcion = descripcionField.getText();

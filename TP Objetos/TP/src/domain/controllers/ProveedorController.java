@@ -77,6 +77,20 @@ public class ProveedorController {
 
     }
 
+    public void AltaProveedor(String nombre, ResponsableIva responsableIva, int cuit, String telefono, String correo, double ingresosBrutos,
+                              String calle, String pais, String provincia, String localidad, int altura, int codigoPostal) {
+        try{
+            if(BuscarProveedor(cuit) == null){
+                proveedores.add(new Proveedor(nombre , responsableIva , cuit, telefono, correo, ingresosBrutos, calle, pais , provincia, localidad, altura , codigoPostal));
+                JOptionPane.showMessageDialog(null, "Proveedor Creado");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Proveedor ya existe");
+        }catch (Exception exc){
+            JOptionPane.showMessageDialog(null,"Error, revise los datos e intente nuevamente");
+        }
+    }
+
     public CuentaCorrienteDTO ConsultaCuentaCorriente(int cuitProveedor){
         CuentaCorrienteDTO cuentaCorrienteDTO;
 
@@ -198,6 +212,7 @@ public class ProveedorController {
             JOptionPane.showMessageDialog(null,"Error, agregar documentos a pagar");
         }
     }
+
 
 
 }

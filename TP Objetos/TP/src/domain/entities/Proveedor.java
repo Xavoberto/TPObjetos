@@ -70,7 +70,7 @@ public class Proveedor {
 
     public Proveedor(String[] datos, String[] direccion) {
         cuit = Integer.parseInt(datos[0]);
-        responsableIva = Objects.equals(datos[1].toUpperCase(), "MONOTRIBUTO") ? ResponsableIva.MONOTRIBUTO : ResponsableIva.RESPONSABLEINSCRIPTO;
+        responsableIva = Objects.equals(datos[1].toUpperCase(), "MONOTRIBUTO") ? ResponsableIva.MONOTRIBUTO : ResponsableIva.RESPONSABLE_INSCRIPTO;
         nombreFantasia = datos[2];
         this.direccion = new Direccion(direccion[0],direccion[1],direccion[2],direccion[3],direccion[4],direccion[5]);
         telefono = datos[4];
@@ -82,6 +82,18 @@ public class Proveedor {
         cuentaCorriente = new CuentaCorriente(this,0,new ArrayList<NotaRecibida>(),new ArrayList<Factura>(),new ArrayList<OrdenDePago>());
         proveedorProductos = new ArrayList<ProveedorProducto>();
         notaRecibidas = new ArrayList<NotaRecibida>();
+    }
+
+    public Proveedor(String nombre, ResponsableIva responsableIva, int cuit, String telefono, String correo, double ingresosBrutos,
+                     String calle, String pais, String provincia, String localidad, int altura, int codigoPostal){
+
+        this.nombreFantasia = nombre;
+        this.responsableIva = responsableIva;
+        this.cuit = cuit;
+        this.telefono = telefono;
+        this.correoElectronico = correo;
+        this.numeroIngresosBrutos = ingresosBrutos;
+        this.direccion = new Direccion(calle, altura, localidad, codigoPostal, provincia, pais);
     }
 
     public void AltaCertificado(CertificadoDTO Certificado){
