@@ -39,6 +39,15 @@ public class ProductoServicio {
         this.rubro = rubro;
     }
 
+    public ProductoServicio(Rubro rubro , TipoDeUnidad tipoDeUnidad, String nombre, double precio, String descripcion, double iva){
+        this.nombre = nombre;
+        this.tipoDeUnidad = tipoDeUnidad;
+        this.precio =  precio;
+        this.descripcion = descripcion;
+        this.iva = new Iva(iva);
+        this.rubro = rubro;
+    }
+
 
     public double getPrecio() {
         return precio;

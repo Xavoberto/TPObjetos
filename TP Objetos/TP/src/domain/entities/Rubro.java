@@ -47,4 +47,15 @@ public class Rubro {
     public String toString(){
         return nombre;
     }
+
+    public boolean AltaProductoServicio(Rubro rubro, TipoDeUnidad tipoDeUnidad, String nombre, double precio, String descripcion, double iva) {
+        try {
+            productoServicios.add(new ProductoServicio(rubro, tipoDeUnidad , nombre, precio , descripcion, iva));
+            JOptionPane.showMessageDialog(null,"producto creado");
+            return true;
+        }catch (Exception exc){
+            JOptionPane.showMessageDialog(null,"El producto no se pudo crear");
+            return false;
+        }
+    }
 }

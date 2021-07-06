@@ -40,6 +40,11 @@ public class ProductoServicioController {
         return rubro2.AltaProductoServicio(tipoDeUnidad, ps, rubro);
     }
 
+    public boolean AltaProductoServicio(Rubro rubro, TipoDeUnidad tipoDeUnidad, String nombre, double precio, String descripcion, double iva) {
+        Rubro rubro1 = getRubros().stream().filter(r -> Objects.equals(r.getNombre(),rubro.getNombre())).findFirst().get();
+        return rubro1.AltaProductoServicio(rubro,tipoDeUnidad, nombre, precio, descripcion, iva);
+    }
+
     public boolean AltaRubro(String nombre){
         try{
             rubros.add(new Rubro(nombre));
@@ -54,6 +59,7 @@ public class ProductoServicioController {
         }
 
     }
+
 
 }
 
