@@ -71,8 +71,16 @@ public class FrmConsultas2 extends JDialog{
         comboProductoServicio.setModel(modeloProductoServ);
 
 
+        DefaultComboBoxModel modeloProvedor = new DefaultComboBoxModel();
+        for (Proveedor proveedor : proveedorController.getProveedoresParaPantalla()) {
+            modeloProvedor.addElement(proveedor);
+        }
+        comboCuitProveedorConsultaLibroIva.setModel(modeloProvedor);
+
+
             //ACCIONES DE LOS BOTONES
 
+        //--------------------------------- CONSULTA DE PRECIOS------------------------------------------------------------------
         buttonConsultaDePrecios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -96,7 +104,7 @@ public class FrmConsultas2 extends JDialog{
             }
         });
 
-
+        //--------------------------------------- FACTURAS RECIBIDAS----------------------------------------------------------------
         buttonBuscarFacturas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -142,7 +150,7 @@ public class FrmConsultas2 extends JDialog{
             }
         });
 
-
+        //---------------------------------CONSULTA LIBRO IVA--------------------------------------------------------
         buttonBuscarDocumentosConsultaLibroIva.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
