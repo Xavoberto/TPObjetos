@@ -19,7 +19,7 @@ public class FrmRealizarPago extends JDialog{
     private JButton buttonBuscarRealizarPago;
     private JComboBox comboDocumentosAPagar;
     private JButton buttonAgregarRealizarPago;
-    private JComboBox comboTipoDeUnidad;
+    private JComboBox comboFormaDePago;
     private JButton buttonPagar;
 
     List<DocumentoRecibido> documentoRecibidos = new ArrayList<DocumentoRecibido>();
@@ -47,6 +47,14 @@ public class FrmRealizarPago extends JDialog{
         }
         comboCuitProveedorRealizarPago.setModel(modeloProveedor);
 
+        DefaultComboBoxModel modeloFormaDePago = new DefaultComboBoxModel();
+
+        for(FormaDePago formaDePago : FormaDePago.values()){
+            modeloFormaDePago.addElement(formaDePago);
+
+        }
+        comboFormaDePago.setModel(modeloFormaDePago);
+
 
         buttonBuscarRealizarPago.addMouseListener(new MouseAdapter() {
             @Override
@@ -71,7 +79,7 @@ public class FrmRealizarPago extends JDialog{
         buttonPagar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                FormaDePago formaDePago = (FormaDePago) comboTipoDeUnidad.getSelectedItem();
+                FormaDePago formaDePago = (FormaDePago) comboFormaDePago.getSelectedItem();
 
                 proveedorController.RealizarPago(((Proveedor) comboCuitProveedorRealizarPago.getSelectedItem()),documentoRecibidos,formaDePago);
 
