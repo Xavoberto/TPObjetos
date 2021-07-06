@@ -21,7 +21,7 @@ public class FrmConsultas2 extends JDialog{
 
         this.setContentPane(panelPrincipal);
 
-        this.setSize(600, 525);
+        this.setSize(600, 470);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // se libera cuando se cierra
 
