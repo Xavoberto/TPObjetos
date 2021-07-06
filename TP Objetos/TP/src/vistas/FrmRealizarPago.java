@@ -17,7 +17,7 @@ public class FrmRealizarPago extends JDialog{
 
         this.setContentPane(panelPrincipal);
 
-        this.setSize(600, 525);
+        this.setSize(600, 400);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // se libera cuando se cierra
 

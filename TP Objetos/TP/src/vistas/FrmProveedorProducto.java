@@ -16,7 +16,7 @@ public class FrmProveedorProducto extends JDialog{
 
         this.setContentPane(panelPrincipal);
 
-        this.setSize(600, 525);
+        this.setSize(525, 250);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // se libera cuando se cierra
 
