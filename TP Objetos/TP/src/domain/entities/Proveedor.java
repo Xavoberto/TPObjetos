@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Proveedor {
     private int cuit;
@@ -100,7 +101,7 @@ public class Proveedor {
     }
 
     public void ValidarCertificados(){
-        List<Certificado> certificadosList = certificados.stream().filter(c -> c.getVencimiento().isBefore(LocalDate.now())).toList();
+        List<Certificado> certificadosList = certificados.stream().filter(c -> c.getVencimiento().isBefore(LocalDate.now())).collect(Collectors.toList());
 
         if(!certificadosList.isEmpty()) {
             for (Certificado certificado : certificadosList) {

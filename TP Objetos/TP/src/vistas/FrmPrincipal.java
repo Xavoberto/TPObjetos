@@ -36,7 +36,9 @@ public class FrmPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmPantallaConsultasGenerales frame = new FrmPantallaConsultasGenerales(self,"Consultas Generales" );
+                FrmConsultas1 frame2 = new FrmConsultas1(self, "Pantalla Consultas 1");
                 frame.setVisible(true);
+                frame2.setVisible(true);
 
             }
         });

@@ -27,7 +27,7 @@ public class FrmPantallaAltas extends JDialog{
 
         this.setLocationRelativeTo(null); // Esto inicia la pantalla centrada
 
-        this.setModal(true);
+
 
         this.asociarEventos();
 
