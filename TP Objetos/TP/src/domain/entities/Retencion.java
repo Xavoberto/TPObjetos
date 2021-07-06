@@ -8,6 +8,7 @@ import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Retencion {
 
@@ -63,5 +64,9 @@ public class Retencion {
 
     public Proveedor getProveedor() {
         return proveedor;
+    }
+
+    public String toString(){
+        return (""+total);
     }
 }

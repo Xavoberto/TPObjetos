@@ -1,6 +1,7 @@
 package vistas;
 
 import domain.controllers.ProveedorController;
+import domain.controllers.RetencionController;
 import domain.entities.CuentaCorriente;
 import domain.entities.Proveedor;
 import domain.entities.entitiesDtos.CuentaCorrienteDTO;
@@ -39,6 +40,7 @@ public class FrmConsultas1 extends JDialog {
 
         ProveedorController proveedorController = ProveedorController.getInstance();
 
+
         DefaultComboBoxModel modeloProveedor = new DefaultComboBoxModel();
 
         for(Proveedor proveedor : proveedorController.getProveedoresParaPantalla()){
@@ -50,6 +52,7 @@ public class FrmConsultas1 extends JDialog {
     }
 
     private void asociarEventos() {
+        RetencionController retencionController = RetencionController.getInstance();
         ProveedorController proveedorController = ProveedorController.getInstance();
         botonMasConsultas.addMouseListener(new MouseAdapter() {
             @Override
@@ -61,13 +64,37 @@ public class FrmConsultas1 extends JDialog {
 
 
 
-
+        //---------------------------------CUENTA CORRIENTE--------------------------------------------------------
         buttonConsultaCuentaCorriente.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Proveedor proveedor = (Proveedor)comboCuitProveedor.getSelectedItem();
                 CuentaCorrienteDTO cuentaCorrienteDTO = proveedorController.ConsultaCuentaCorriente(proveedor.getCuit());
                 JOptionPane.showMessageDialog(null, cuentaCorrienteDTO.Print());
+            }
+        });
+
+        //---------------------------------ORDENES DE PAGO--------------------------------------------------------
+        buttonEmitirOrdenesDePago.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null,proveedorController.OrdenesDePagoEmitidas());
+            }
+        });
+
+        //---------------------------------DEUDA POR PROVEEDOR--------------------------------------------------------
+        ButtonDeudaPorProveedor.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, proveedorController.TotalDeudaPorProveedor());
+            }
+        });
+
+        //---------------------------------IMPUESTOS RETENIDOS  --------------------------------------------------------
+        buttonImpuestosRetenidos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, retencionController.TotalImpuestosRetenidos());
             }
         });
     }
