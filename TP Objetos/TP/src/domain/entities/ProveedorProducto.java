@@ -24,7 +24,16 @@ public class ProveedorProducto {
     public String ToString() {return producto.getNombre();
     }
 
+    public ProductoServicio getProducto(){
+        return producto;
+    }
+
+
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
 }

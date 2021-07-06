@@ -65,7 +65,7 @@ public class FrmConsultas2 extends JDialog{
 
         for(Rubro rubro : productoServicio.getRubros())
             for(ProductoServicio productoServicioCombo : rubro.getProductoServicios()){
-                modeloProductoServ.addElement(productoServicio);
+                modeloProductoServ.addElement(productoServicioCombo);
             }
 
         comboProductoServicio.setModel(modeloProductoServ);
@@ -93,7 +93,7 @@ public class FrmConsultas2 extends JDialog{
 
                 if (!proveedorPrecioList.isEmpty()){
                     for (ProveedorPrecio proveedorPrecio : proveedorPrecioList){
-                        respuesta += proveedorPrecio.Print() + "    /n   ";
+                        respuesta += proveedorPrecio.Print() + "    \n   ";
 
                     }
                 }

@@ -11,7 +11,7 @@
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="North"/>
         <properties>
-          <background color="-8388636"/>
+          <background color="-12828863"/>
           <preferredSize width="-1" height="50"/>
         </properties>
         <border type="none"/>
@@ -21,8 +21,8 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font name="Consolas" size="24" style="0"/>
-              <foreground color="-16777216"/>
+              <font name="Source Code Pro" size="24" style="1"/>
+              <foreground color="-1"/>
               <text value="Pantalla Principal"/>
             </properties>
           </component>

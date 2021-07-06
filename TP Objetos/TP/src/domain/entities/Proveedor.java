@@ -94,6 +94,12 @@ public class Proveedor {
         this.correoElectronico = correo;
         this.numeroIngresosBrutos = ingresosBrutos;
         this.direccion = new Direccion(calle, altura, localidad, codigoPostal, provincia, pais);
+        inicioActividades = LocalDateTime.now();
+        rubros = new ArrayList<Rubro>();
+        certificados = new ArrayList<Certificado>();
+        cuentaCorriente = new CuentaCorriente(this,0,new ArrayList<NotaRecibida>(),new ArrayList<Factura>(),new ArrayList<OrdenDePago>());
+        proveedorProductos = new ArrayList<ProveedorProducto>();
+        notaRecibidas = new ArrayList<NotaRecibida>();
     }
 
     public void AltaCertificado(CertificadoDTO Certificado){
@@ -136,7 +142,7 @@ public class Proveedor {
 
     public boolean AltaProveedorProducto(ProductoServicio productoServicio, double precio){
         try{
-            ProveedorProducto proveedorProducto = new ProveedorProducto(productoServicio,precio);
+            ProveedorProducto proveedorProducto = new ProveedorProducto(this,productoServicio,precio);
             if(proveedorProductos.stream().anyMatch(p -> Objects.equals(p.getProductoServicio().getNombre(),proveedorProducto.getProductoServicio().getNombre()))) {
                 proveedorProductos.stream().filter(p -> Objects.equals(p.getProductoServicio().getNombre(), proveedorProducto.getProductoServicio().getNombre())).findFirst()
                         .get().setPrecio(precio);

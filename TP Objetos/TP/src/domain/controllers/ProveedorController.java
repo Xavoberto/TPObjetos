@@ -115,7 +115,7 @@ public class ProveedorController {
                 && p.getRubros().stream().anyMatch(r -> Objects.equals(r.getNombre().toLowerCase(), rubro.getNombre().toLowerCase()))).collect(Collectors.toList());
 
         for (Proveedor proveedor: proveedorList){
-            proveedorPrecioList.add(new ProveedorPrecio(proveedor.getProducto(nombreProducto).getProductoServicio().getPrecio(),proveedor.getCuit()));
+            proveedorPrecioList.add(new ProveedorPrecio(proveedor.getProducto(nombreProducto).getPrecio(),proveedor.getCuit()));
         }
 
         return proveedorPrecioList;
