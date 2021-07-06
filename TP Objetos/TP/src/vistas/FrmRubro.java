@@ -1,7 +1,12 @@
 package vistas;
 
+import domain.controllers.ProductoServicioController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 public class FrmRubro extends JDialog{
     private JPanel panelPrincipal;
@@ -22,6 +27,24 @@ public class FrmRubro extends JDialog{
         this.setLocationRelativeTo(null); // Esto inicia la pantalla centrada
 
         this.setModal(true);
+
+
+        ProductoServicioController productoServicioController = ProductoServicioController.getInstance();
+
+
+        ingresarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String nombre = nombreField.getText();
+                if (!Objects.equals(nombre, "")) {
+                    productoServicioController.AltaRubro(nombre);
+                }
+
+            }
+        });
     }
+
+
+
 
 }

@@ -1,5 +1,10 @@
 package vistas;
 
+import domain.controllers.ProveedorController;
+import domain.entities.CuentaCorriente;
+import domain.entities.Proveedor;
+import domain.entities.entitiesDtos.CuentaCorrienteDTO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -7,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class FrmConsultas1 extends JDialog {
     private JPanel panelPrincipal;
-    private JComboBox comboBox1;
+    private JComboBox comboCuitProveedor;
     private JButton buttonConsultaCuentaCorriente;
     private JButton buttonEmitirOrdenesDePago;
     private JButton ButtonDeudaPorProveedor;
@@ -32,9 +37,20 @@ public class FrmConsultas1 extends JDialog {
 
         this.self = this;
 
+        ProveedorController proveedorController = ProveedorController.getInstance();
+
+        DefaultComboBoxModel modeloProveedor = new DefaultComboBoxModel();
+
+        for(Proveedor proveedor : proveedorController.getProveedoresParaPantalla()){
+            modeloProveedor.addElement(proveedor);
+
+        }
+        comboCuitProveedor.setModel(modeloProveedor);
+
     }
 
     private void asociarEventos() {
+        ProveedorController proveedorController = ProveedorController.getInstance();
         botonMasConsultas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -45,6 +61,15 @@ public class FrmConsultas1 extends JDialog {
 
 
 
+
+        buttonConsultaCuentaCorriente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Proveedor proveedor = (Proveedor)comboCuitProveedor.getSelectedItem();
+                CuentaCorrienteDTO cuentaCorrienteDTO = proveedorController.ConsultaCuentaCorriente(proveedor.getCuit());
+                JOptionPane.showMessageDialog(null, cuentaCorrienteDTO.Print());
+            }
+        });
     }
 
 }
