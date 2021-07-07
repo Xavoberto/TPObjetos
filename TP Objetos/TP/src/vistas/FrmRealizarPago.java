@@ -79,6 +79,10 @@ public class FrmRealizarPago extends JDialog{
         buttonPagar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(documentoRecibidos.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Agregar factura antes de pagar.");
+                    return;
+                }
                 FormaDePago formaDePago = (FormaDePago) comboFormaDePago.getSelectedItem();
 
                 proveedorController.RealizarPago(((Proveedor) comboCuitProveedorRealizarPago.getSelectedItem()),documentoRecibidos,formaDePago);

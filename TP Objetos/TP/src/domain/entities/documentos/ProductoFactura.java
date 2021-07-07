@@ -2,6 +2,7 @@ package domain.entities.documentos;
 
 import domain.entities.ProductoServicio;
 import domain.entities.ProveedorProducto;
+import domain.entities.entitiesDtos.ProductoServicioDTO;
 
 public class ProductoFactura {
     private String nombre;
@@ -30,6 +31,7 @@ public class ProductoFactura {
         descripcion = productoFactura[2];
         iva = new Iva(Double.parseDouble(productoFactura[3]));
     }
+
 
     public double getPrecio() {
         return precio;

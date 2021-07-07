@@ -1,5 +1,6 @@
 package domain.entities.documentos;
 
+import domain.entities.ItemCompra;
 import domain.entities.Proveedor;
 import domain.entities.ProveedorProducto;
 import domain.entities.documentos.dtos.FacturaDTO;
@@ -36,6 +37,13 @@ public class Factura implements DocumentoRecibido {
         this.productos = new ArrayList<ProductoFactura>();
 
         productos.add(new ProductoFactura(productoFactura));
+    }
+
+    public Factura(Proveedor proveedor, int nroCompra, List<ItemCompra> itemsCompra, double precioTotal, List<ProductoFactura> productos) {
+        this.proveedor = proveedor;
+        this.ordenDeCompra = new OrdenDeCompra(nroCompra, itemsCompra, precioTotal);
+        this.fecha = LocalDate.now();
+        this.productos = productos;
     }
 
 

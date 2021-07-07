@@ -7,8 +7,10 @@ import domain.entities.enumeraciones.RetencionImpuestos;
 import domain.entities.interfaces.DocumentoRecibido;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Retencion {
 
@@ -37,10 +39,18 @@ public class Retencion {
     private double CalcularRetencion(double total, List<DocumentoRecibido> documentoRecibidos){
         double retencionAPagar = 0;
         double iva = 0;
+        double ivaPagado = 0;
 
         proveedor.ValidarCertificados();
         List<Certificado> certificados = proveedor.getCertificados();
-        double ivaPagado = documentoRecibidos.stream().filter(d -> d.esFactura()).mapToDouble(factura -> ((Factura)factura).getIvaTotal()).sum();
+        List<DocumentoRecibido> facturas = documentoRecibidos.stream().filter(d -> d.esFactura()).collect(Collectors.toList());
+        List<Factura> facturaList = new ArrayList<Factura>();
+
+        for(DocumentoRecibido documentoRecibido : facturas){
+            facturaList.add((Factura)documentoRecibido);
+        }
+
+         ivaPagado = facturaList.stream().mapToDouble(factura -> (factura).getIvaTotal()).sum();
 
         if(certificados.isEmpty()){
             return (total * (38.5 / 100)) + ivaPagado;

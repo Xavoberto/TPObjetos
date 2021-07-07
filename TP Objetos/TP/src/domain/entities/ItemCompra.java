@@ -10,4 +10,16 @@ public class ItemCompra {
         cantidad = Integer.parseInt(itemCompra[0]);
         precio = Double.parseDouble(itemCompra[1]);
     }
+
+    public ItemCompra(ProveedorProducto proveedorProducto, int cantidad, double precio){
+        producto = proveedorProducto;
+        cantidad = cantidad;
+        this.precio = precio;
+    }
+
+
+
+    public double getPrecio() {
+        return precio;
+    }
 }

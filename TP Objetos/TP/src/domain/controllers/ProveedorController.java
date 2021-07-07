@@ -47,8 +47,8 @@ public class ProveedorController {
             LocalDateTime.now(),rubros , new ArrayList<Certificado>(), proveedorProductos, new ArrayList<NotaRecibida>()));
 
         proveedores.get(0).setProveedorCuentaCorriente();
-        documentoRecibidos.add(new Factura(proveedores.get(0), null, LocalDate.now(), productoFacturas ));
-        proveedores.get(0).getCuentaCorriente().RealizarPago(FormaDePago.EFECTIVO,documentoRecibidos);
+        documentoRecibidos.add(new Factura(proveedores.get(0), new OrdenDeCompra(72,new ArrayList<ItemCompra>(), 7453), LocalDate.now(),productoFacturas ));
+        proveedores.get(0).getCuentaCorriente().AgregarFactura((Factura)documentoRecibidos.get(0));
     }
 
     public static ProveedorController getInstance(){
@@ -205,8 +205,8 @@ public class ProveedorController {
                     documentoRecibidos.add((NotaRecibida) documentoRecibido);
             }
 
-            selectedItem.getCuentaCorriente().RealizarPago(formaDePago,documentoRecibidos);
-            JOptionPane.showMessageDialog(null,"Pago realizado");
+            if(selectedItem.getCuentaCorriente().RealizarPago(formaDePago,documentoRecibidos))
+                JOptionPane.showMessageDialog(null,"Pago realizado");
         }
         catch (Exception ex){
             JOptionPane.showMessageDialog(null,"Error, agregar documentos a pagar");

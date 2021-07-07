@@ -47,9 +47,9 @@ public class FrmPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmPantallaAltas frame2 = new FrmPantallaAltas(self, "Pantalla Altas");
-                FrmPantallaOtros frame = new FrmPantallaOtros(self , "Pantalla Otros");
+                //FrmPantallaOtros frame = new FrmPantallaOtros(self , "Pantalla Otros");
                 frame2.setVisible(true);
-                frame.setVisible(true);
+                //frame.setVisible(true);
             }
         });
     }

@@ -21,7 +21,7 @@ public class ProveedorProducto {
          return new ProductoServicioDTO(producto.getNombre(),producto.getTipoDeUnidad(),producto.getPrecio(),producto.getDescripcion(),producto.getIva(),producto.getRubro());
     }
 
-    public String ToString() {return producto.getNombre();
+    public String toString() {return producto.getNombre();
     }
 
     public ProductoServicio getProducto(){
@@ -36,4 +36,6 @@ public class ProveedorProducto {
     public double getPrecio() {
         return precio;
     }
+
+
 }

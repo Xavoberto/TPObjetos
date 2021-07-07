@@ -53,7 +53,7 @@ public class CuentaCorriente {
         return pagosRealizados;
     }
 
-    public void RealizarPago(FormaDePago formaDePago, List<DocumentoRecibido> documentosAPagar){
+    public boolean RealizarPago(FormaDePago formaDePago, List<DocumentoRecibido> documentosAPagar){
         RetencionController retencionController = RetencionController.getInstance();
 
         double montoAPagar = documentosAPagar.stream().mapToDouble(d -> d.getMonto()).sum();
@@ -63,6 +63,7 @@ public class CuentaCorriente {
         for(DocumentoRecibido documentoRecibido : documentosAPagar){
             documentosImpagos.remove((Factura) documentoRecibido);
         }
+        return true;
     }
 
     public Proveedor getProveedor() {

@@ -22,4 +22,15 @@ public class OrdenDeCompra {
 
         items.add(new ItemCompra(itemCompra, producto));
     }
+
+    public OrdenDeCompra(int nroCompra, List<ItemCompra> itemsCompra, double precio){
+        this.nroCompra = nroCompra;
+        this.items = itemsCompra;
+        this.precio = precio;
+        this.fecha = LocalDate.now();
+    }
+
+    public int getNroCompra() {
+        return nroCompra;
+    }
 }

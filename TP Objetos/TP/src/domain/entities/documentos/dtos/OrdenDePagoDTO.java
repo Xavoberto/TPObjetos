@@ -1,6 +1,7 @@
 package domain.entities.documentos.dtos;
 
 import domain.entities.Retencion;
+import domain.entities.documentos.Factura;
 import domain.entities.documentos.OrdenDePago;
 import domain.entities.enumeraciones.FormaDePago;
 import domain.entities.interfaces.DocumentoRecibido;
